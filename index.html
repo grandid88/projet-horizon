@@ -1,115 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>I&D Airlines - Projet HORIZON</title>
 
-    <meta name="theme-color" content="#13233F">
+    <meta name="theme-color" content="#13233F" />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animations.css" />
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-
+  <body>
     <!-- =====================================================
          SPLASH SCREEN
     ====================================================== -->
 
     <section id="splash-screen" class="screen active">
+      <div class="logo-container">
+        <div class="plane">✈</div>
 
-        <div class="logo-container">
+        <h1>I&D AIRLINES</h1>
 
-            <div class="plane">
-                ✈
-            </div>
-
-            <h1>I&D AIRLINES</h1>
-
-            <p>Le voyage commence...</p>
-
-        </div>
-
+        <p>Le voyage commence...</p>
+      </div>
     </section>
-
 
     <!-- =====================================================
          COUVERTURE PASSEPORT
     ====================================================== -->
 
-<section id="passport-cover" class="screen hidden">
+    <section id="passport-cover" class="screen hidden">
+      <div class="passport-3d" id="passport">
+        <!-- Ombre -->
+        <div class="passport-shadow"></div>
 
-    <div class="passport-3d" id="passport">
+        <!-- Passeport -->
+        <div class="passport-book">
+          <!-- Tranche -->
+          <div class="passport-spine"></div>
 
-        <!-- Couverture -->
-        <div class="passport-cover">
+          <!-- Couverture -->
+          <div class="passport-cover-wrapper">
 
-            <div class="passport-content">
+    <div class="passport-cover">
 
-                <div class="gold-plane">
-                    ✈
-                </div>
+        <div class="passport-content">
 
-                <h2>PASSEPORT</h2>
+            <div class="gold-plane">✈</div>
 
-                <h3>DU VOYAGEUR</h3>
+            <h2>PASSEPORT</h2>
 
-                <p>Destination</p>
+            <h3>DU VOYAGEUR</h3>
 
-                <h4>ÎLE MAURICE</h4>
+            <p>Destination</p>
 
-                <button id="btn-open-passport">
-                    Embarquer
-                </button>
+            <h4>ÎLE MAURICE</h4>
 
-            </div>
-
-        </div>
-
-        <!-- Pages -->
-        <div class="passport-pages">
-
-            <div class="page-left">
-
-                <h3>Bienvenue à bord</h3>
-
-                <p>
-                    Votre voyage commence...
-                </p>
-
-            </div>
-
-            <div class="page-right">
-
-                <h3>Passeport</h3>
-
-                <p>
-                    Intérieur en construction
-                </p>
-
-            </div>
+            <button id="btn-open-passport">
+                Embarquer
+            </button>
 
         </div>
 
     </div>
 
-</section>
+</div>
 
+<div class="passport-pages">
+
+    <div class="page-left">
+
+        <h3>Bienvenue à bord</h3>
+
+        <p>Votre voyage commence...</p>
+
+    </div>
+
+    <div class="page-right">
+
+        <h3>Passeport</h3>
+
+        <p>Intérieur en construction</p>
+
+    </div>
+
+</div>
+      </div>
+    </section>
 
     <!-- Javascript -->
     <script src="js/app.js"></script>
 
-</body>
+<script src="js/passport.js"></script>
+<script src="js/app.js"></script>
 
+  </body>
 </html>

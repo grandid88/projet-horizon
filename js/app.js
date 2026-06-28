@@ -6,71 +6,45 @@ I&D AIRLINES
 
 Application principale
 
-Version : 0.1
+Version : 0.2.0
 
 ======================================================
 */
-
 
 // ====================================================
 // ELEMENTS HTML
 // ====================================================
 
-const splashScreen = document.querySelector("#splash-screen");
-
-const passportCover = document.querySelector("#passport-cover");
-
-const openPassportButton =
-    document.querySelector("#btn-open-passport");
-
-
-// ====================================================
-// INITIALISATION
-// ====================================================
-
-window.addEventListener("load", initializeApp);
-
+const splashScreen = document.getElementById("splash-screen");
+const passportScreen = document.getElementById("passport-cover");
 
 // ====================================================
 // DEMARRAGE
 // ====================================================
 
+window.addEventListener("load", initializeApp);
+
 function initializeApp() {
+  console.log("✈ Projet HORIZON v0.2.0");
 
-    console.log("✈ Projet HORIZON V0.1");
-
-    launchSplashScreen();
-
+  launchSplashScreen();
 }
-
 
 // ====================================================
 // SPLASH SCREEN
 // ====================================================
 
 function launchSplashScreen() {
+  setTimeout(() => {
+    // Masquer le Splash
+    splashScreen.classList.remove("active");
+    splashScreen.classList.add("hidden");
 
-    setTimeout(() => {
+    // Afficher l'écran Passeport
+    passportScreen.classList.remove("hidden");
+    passportScreen.classList.add("active");
 
-        splashScreen.classList.remove("active");
-
-        splashScreen.classList.add("hidden");
-
-        passportCover.classList.remove("hidden");
-
-        passportCover.classList.add("active");
-
-    }, 2200);
-
+    // Initialiser le composant Passeport
+    window.passport = new Passport("#passport");
+  }, 2200);
 }
-
-
-// ====================================================
-// EVENEMENTS
-// ====================================================
-
-openPassportButton.addEventListener("click", () => {
-
-    alert("Bienvenue à bord !");
-
-});
