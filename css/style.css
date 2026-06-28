@@ -1,0 +1,406 @@
+/* ==========================================================
+   PROJET HORIZON
+   STYLE GENERAL
+   Version 0.1
+========================================================== */
+
+/* ---------- RESET ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    font-size:16px;
+
+}
+
+body{
+
+    font-family:var(--text-font);
+
+    background:linear-gradient(
+        180deg,
+        var(--navy),
+        #1B3156
+    );
+
+    color:var(--ivory);
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+}
+
+
+/* ---------- ECRANS ---------- */
+
+.screen{
+
+    width:100%;
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:all .5s ease;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+
+/* ---------- SPLASH ---------- */
+
+.logo-container{
+
+    text-align:center;
+
+}
+
+.plane{
+
+    font-size:70px;
+
+    color:var(--gold);
+
+    margin-bottom:25px;
+
+}
+
+.logo-container h1{
+
+    font-family:var(--title-font);
+
+    font-size:48px;
+
+    font-weight:700;
+
+    color:var(--gold);
+
+    letter-spacing:2px;
+
+}
+
+.logo-container p{
+
+    margin-top:20px;
+
+    font-size:18px;
+
+    color:var(--ivory);
+
+    opacity:.9;
+
+}
+
+
+/* ---------- PASSEPORT ---------- */
+
+.passport{
+
+    width:340px;
+
+    height:540px;
+
+    background:linear-gradient(
+        180deg,
+        #16315A,
+        #112445
+    );
+
+    border-radius:22px;
+
+    border:2px solid rgba(212,175,55,.35);
+
+    box-shadow:var(--shadow-card);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+}
+
+.passport-content{
+
+    text-align:center;
+
+}
+
+.gold-plane{
+
+    font-size:42px;
+
+    color:var(--gold);
+
+    margin-bottom:20px;
+
+}
+
+.passport h2{
+
+    font-family:var(--title-font);
+
+    color:var(--gold);
+
+    font-size:38px;
+
+    letter-spacing:3px;
+
+}
+
+.passport h2,
+.passport h4{
+
+    background:linear-gradient(
+
+        180deg,
+
+        #fff6c8,
+
+        #e6c765,
+
+        #c79c20
+
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+.passport h3{
+
+    margin-top:5px;
+
+    font-family:var(--title-font);
+
+    font-size:22px;
+
+    color:var(--ivory);
+
+    font-weight:400;
+
+}
+
+.passport p{
+
+    margin-top:45px;
+
+    font-size:14px;
+
+    opacity:.8;
+
+}
+
+.passport{
+
+    position:relative;
+
+    width:340px;
+    height:540px;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:30px;
+
+    background:
+        radial-gradient(circle at top left,
+            rgba(255,255,255,.05),
+            transparent 45%),
+
+        linear-gradient(
+            180deg,
+            #173865,
+            #11294d
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+}
+
+.passport::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.08;
+
+    background-image:
+
+        radial-gradient(circle, #ffffff 1px, transparent 1px);
+
+    background-size:7px 7px;
+
+    pointer-events:none;
+
+}
+
+.passport::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+
+    left:-50%;
+
+    width:60%;
+
+    height:300%;
+
+    transform:rotate(25deg);
+
+    background:
+
+        linear-gradient(
+
+            transparent,
+
+            rgba(255,255,255,.10),
+
+            rgba(255,255,255,.35),
+
+            rgba(255,255,255,.10),
+
+            transparent
+
+        );
+
+    animation:shine 7s linear infinite;
+
+}
+
+
+/* ---------- BOUTON ---------- */
+
+button{
+
+    margin-top:60px;
+
+    width:220px;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    background:var(--gold);
+
+    color:var(--navy);
+
+    font-weight:600;
+
+    font-size:17px;
+
+    transition:.30s;
+
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(212,175,55,.35);
+
+}
+
+/* ==================================================
+   PASSEPORT 3D
+================================================== */
+
+.passport-3d{
+
+    position:relative;
+
+    width:340px;
+
+    height:540px;
+
+    perspective:1800px;
+
+}
+
+.passport-cover{
+
+    position:absolute;
+
+    inset:0;
+
+    transform-origin:left center;
+
+    transition:transform .9s cubic-bezier(.25,.8,.25,1);
+
+    z-index:20;
+
+}
+
+.passport-pages{
+
+    position:absolute;
+
+    inset:0;
+
+    background:var(--ivory);
+
+    border-radius:24px;
+
+    display:flex;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow-card);
+
+}
+
+.page-left,
+.page-right{
+
+    width:50%;
+
+    padding:24px;
+
+    color:var(--navy);
+
+}
+
+.passport-3d.open .passport-cover{
+
+    transform:rotateY(-165deg);
+
+}

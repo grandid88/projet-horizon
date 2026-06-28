@@ -1,0 +1,171 @@
+/* ==========================================================
+   PROJET HORIZON
+   ANIMATIONS
+   Version 0.1
+========================================================== */
+
+
+/* ==========================================================
+   FADE IN
+========================================================== */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+/* ==========================================================
+   FADE OUT
+========================================================== */
+
+@keyframes fadeOut{
+
+    from{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   MONTEE DOUCE
+========================================================== */
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   APPARITION PASSEPORT
+========================================================== */
+
+@keyframes passportAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.90);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* ==========================================================
+   PETIT MOUVEMENT DE L'AVION
+========================================================== */
+
+@keyframes planeFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   BRILLANCE DORURE
+========================================================== */
+
+@keyframes goldShine{
+
+    0%{
+
+        opacity:.65;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:.65;
+
+    }
+
+}
+
+@keyframes shine{
+
+    from{
+
+        transform:
+            translateX(-250%)
+            rotate(25deg);
+
+    }
+
+    to{
+
+        transform:
+            translateX(450%)
+            rotate(25deg);
+
+    }
+
+}
