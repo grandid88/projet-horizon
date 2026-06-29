@@ -2,19 +2,27 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>I&D Airlines - Projet HORIZON</title>
+    <title>I&D Airlines • Projet HORIZON</title>
 
     <meta name="theme-color" content="#13233F" />
 
-    <!-- Styles -->
+    <!-- ==========================================================
+         STYLES
+    =========================================================== -->
+
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/animations.css" />
 
-    <!-- Google Fonts -->
+    <!-- ==========================================================
+         GOOGLE FONTS
+    =========================================================== -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link
@@ -24,88 +32,96 @@
   </head>
 
   <body>
-    <!-- =====================================================
-         SPLASH SCREEN
-    ====================================================== -->
+    <!-- ==========================================================
+         HORIZON APP
+         Point d'entrée unique de l'application
+    =========================================================== -->
 
-    <section id="splash-screen" class="screen active">
-      <div class="logo-container">
-        <div class="plane">✈</div>
+    <main id="app">
+      <!-- ======================================================
+             SPLASH SCREEN
+        ======================================================= -->
 
-        <h1>I&D AIRLINES</h1>
+      <section id="splash-screen" class="screen active">
+        <div class="logo-container">
+          <div class="plane">✈</div>
 
-        <p>Le voyage commence...</p>
-      </div>
-    </section>
+          <h1>I&amp;D AIRLINES</h1>
 
-    <!-- =====================================================
-         COUVERTURE PASSEPORT
-    ====================================================== -->
-
-    <section id="passport-cover" class="screen hidden">
-      <div class="passport-3d" id="passport">
-        <!-- Ombre -->
-        <div class="passport-shadow"></div>
-
-        <!-- Passeport -->
-        <div class="passport-book">
-          <!-- Tranche -->
-          <div class="passport-spine"></div>
-
-          <!-- Couverture -->
-          <div class="passport-cover-wrapper">
-
-    <div class="passport-cover">
-
-        <div class="passport-content">
-
-            <div class="gold-plane">✈</div>
-
-            <h2>PASSEPORT</h2>
-
-            <h3>DU VOYAGEUR</h3>
-
-            <p>Destination</p>
-
-            <h4>ÎLE MAURICE</h4>
-
-            <button id="btn-open-passport">
-                Embarquer
-            </button>
-
+          <p>Le voyage commence...</p>
         </div>
+      </section>
 
-    </div>
+      <!-- ======================================================
+             PASSEPORT
+        ======================================================= -->
 
-</div>
+      <section id="passport-cover" class="screen hidden">
+        <div id="passport" class="passport-3d">
+          <!-- Ombre -->
 
-<div class="passport-pages">
+          <div class="passport-shadow"></div>
 
-    <div class="page-left">
+          <!-- Livre -->
 
-        <h3>Bienvenue à bord</h3>
+          <div class="passport-book">
+            <!-- Tranche -->
 
-        <p>Votre voyage commence...</p>
+            <div class="passport-spine"></div>
 
-    </div>
+            <!-- Dos -->
 
-    <div class="page-right">
+            <div class="passport-back"></div>
 
-        <h3>Passeport</h3>
+            <!-- Couverture -->
 
-        <p>Intérieur en construction</p>
+            <div class="passport-cover-wrapper">
+              <div class="passport-cover">
+                <div class="passport-content">
+                  <div class="gold-plane">✈</div>
 
-    </div>
+                  <h2>PASSEPORT</h2>
 
-</div>
-      </div>
-    </section>
+                  <h3>DU VOYAGEUR</h3>
 
-    <!-- Javascript -->
+                  <p>Destination</p>
+
+                  <h4>ÎLE MAURICE</h4>
+
+                  <button id="btn-open-passport">Embarquer</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pages -->
+
+            <div class="passport-pages">
+              <div class="page-left">
+                <h3>Bienvenue à bord</h3>
+
+                <p>Votre voyage commence...</p>
+              </div>
+
+              <div class="page-right">
+                <h3>Passeport</h3>
+
+                <p>Intérieur en construction</p>
+              </div>
+            </div>
+
+            <!-- Tranche extérieure -->
+
+            <div class="passport-edge"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================================
+         JAVASCRIPT
+    =========================================================== -->
+
+    <script src="js/passport.js"></script>
     <script src="js/app.js"></script>
-
-<script src="js/passport.js"></script>
-<script src="js/app.js"></script>
-
   </body>
 </html>
