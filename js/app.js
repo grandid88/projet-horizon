@@ -301,9 +301,10 @@ function renderApp() {
 
   /* Listeners missions */
   document.querySelectorAll(".btn-mission[data-mission]").forEach(function(btn) {
-    btn.addEventListener("click", async function() {
-      var result = Missions.complete(btn.getAttribute("data-mission"));
-      if (result) { await dbSavePassenger(Storage.load()); showReward(result); }
+    btn.addEventListener("click", function() {
+      var missionId = btn.getAttribute("data-mission");
+      var mission   = Missions.data.find(function(m) { return m.id === missionId; });
+      if (mission) showPinMission(mission);
     });
   });
 }
@@ -449,3 +450,74 @@ window.addEventListener("load", function() {
     });
   }, 2400);
 });
+
+/* ==========================================================
+   VALIDATION PAR CODE PIN
+========================================================== */
+
+function showPinMission(mission) {
+  var pinValue = "";
+  var overlay  = document.createElement("div");
+  overlay.className = "mission-pin-overlay";
+  overlay.id = "pin-mission-overlay";
+
+  overlay.innerHTML =
+    '<div class="mission-pin-card">' +
+      '<div class="mission-pin-title">🔐 Code de validation</div>' +
+      '<div class="mission-pin-subtitle">Mission accomplie ? Obtenez le code auprès du DJ et saisissez-le ici.</div>' +
+      '<div class="mission-pin-display">' +
+        '<span class="mission-pin-dot" id="mpd-0"></span>' +
+        '<span class="mission-pin-dot" id="mpd-1"></span>' +
+        '<span class="mission-pin-dot" id="mpd-2"></span>' +
+        '<span class="mission-pin-dot" id="mpd-3"></span>' +
+      '</div>' +
+      '<div class="mission-pin-error" id="pin-mission-error"></div>' +
+      '<div class="mission-pin-keypad">' +
+        [1,2,3,4,5,6,7,8,9,"",0,"⌫"].map(function(k) {
+          if (k === "") return '<div></div>';
+          return '<button class="mission-pin-key' + (k==="⌫"?" del":"") + '" data-k="'+k+'">'+k+'</button>';
+        }).join("") +
+      '</div>' +
+      '<button class="btn-pin-cancel" id="btn-pin-cancel">Annuler</button>' +
+    '</div>';
+
+  document.body.appendChild(overlay);
+
+  function updateDots() {
+    for (var i = 0; i < 4; i++) {
+      var dot = document.getElementById("mpd-" + i);
+      dot.classList.toggle("filled", i < pinValue.length);
+      dot.classList.remove("error");
+    }
+    document.getElementById("pin-mission-error").textContent = "";
+  }
+
+  function checkCode() {
+    if (pinValue === mission.code) {
+      document.body.removeChild(overlay);
+      var result = Missions.complete(mission.id);
+      if (result) {
+        dbSavePassenger(Storage.load());
+        showReward(result);
+      }
+    } else {
+      for (var i = 0; i < 4; i++) document.getElementById("mpd-"+i).classList.add("error");
+      document.getElementById("pin-mission-error").textContent = "Code incorrect — réessayez !";
+      setTimeout(function() { pinValue = ""; updateDots(); }, 900);
+    }
+  }
+
+  overlay.querySelectorAll(".mission-pin-key").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var k = btn.getAttribute("data-k");
+      if (k === "⌫") { pinValue = pinValue.slice(0,-1); }
+      else if (pinValue.length < 4) { pinValue += k; }
+      updateDots();
+      if (pinValue.length === 4) checkCode();
+    });
+  });
+
+  document.getElementById("btn-pin-cancel").addEventListener("click", function() {
+    document.body.removeChild(overlay);
+  });
+}
