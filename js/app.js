@@ -6,45 +6,59 @@ I&D AIRLINES
 
 Application principale
 
-Version : 0.2.0
+Version : 0.3.0
 
 ======================================================
 */
 
 // ====================================================
-// ELEMENTS HTML
+// APPLICATION
 // ====================================================
 
-const splashScreen = document.getElementById("splash-screen");
-const passportScreen = document.getElementById("passport-cover");
+const Horizon = {
+  splashScreen: null,
+
+  passportScreen: null,
+
+  init() {
+    console.log("✈ Projet HORIZON v0.3.0");
+
+    this.cacheDom();
+
+    this.launchSplashScreen();
+  },
+
+  cacheDom() {
+    this.splashScreen = document.getElementById("splash-screen");
+
+    this.passportScreen = document.getElementById("passport-cover");
+  },
+
+  launchSplashScreen() {
+    setTimeout(() => {
+      // Masquer le Splash
+
+      this.splashScreen.classList.remove("active");
+
+      this.splashScreen.classList.add("hidden");
+
+      // Afficher le Passeport
+
+      this.passportScreen.classList.remove("hidden");
+
+      this.passportScreen.classList.add("active");
+
+      // Initialiser le composant Passeport
+
+      window.passport = new Passport("#passport");
+    }, 2200);
+  },
+};
 
 // ====================================================
 // DEMARRAGE
 // ====================================================
 
-window.addEventListener("load", initializeApp);
-
-function initializeApp() {
-  console.log("✈ Projet HORIZON v0.2.0");
-
-  launchSplashScreen();
-}
-
-// ====================================================
-// SPLASH SCREEN
-// ====================================================
-
-function launchSplashScreen() {
-  setTimeout(() => {
-    // Masquer le Splash
-    splashScreen.classList.remove("active");
-    splashScreen.classList.add("hidden");
-
-    // Afficher l'écran Passeport
-    passportScreen.classList.remove("hidden");
-    passportScreen.classList.add("active");
-
-    // Initialiser le composant Passeport
-    window.passport = new Passport("#passport");
-  }, 2200);
-}
+window.addEventListener("load", () => {
+  Horizon.init();
+});
