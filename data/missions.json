@@ -1,0 +1,70 @@
+{
+  "missions": [
+    {
+      "id": "m001",
+      "type": "permanent",
+      "categorie": "social",
+      "couleur": "#E8834A",
+      "emoji": "🟠",
+      "titre": "Trouver une personne née en juillet",
+      "description": "Demandez aux autres invités leur mois de naissance !",
+      "km": 40,
+      "prerequis": []
+    },
+    {
+      "id": "m002",
+      "type": "permanent",
+      "categorie": "photo",
+      "couleur": "#4CAF8A",
+      "emoji": "🟢",
+      "titre": "Selfie avec quelqu'un de la table Maurice",
+      "description": "Faites un selfie avec un passager de la table Maurice !",
+      "km": 80,
+      "prerequis": []
+    },
+    {
+      "id": "m003",
+      "type": "permanent",
+      "categorie": "photo",
+      "couleur": "#5B9BD5",
+      "emoji": "🔵",
+      "titre": "Photographier un éclat de rire",
+      "description": "Capturez le plus beau fou rire de la soirée !",
+      "km": 70,
+      "prerequis": []
+    },
+    {
+      "id": "m004",
+      "type": "permanent",
+      "categorie": "enquete",
+      "couleur": "#9B59B6",
+      "emoji": "🟣",
+      "titre": "Trouver quelqu'un qui connaît Isabelle depuis plus de 20 ans",
+      "description": "Partez à la rencontre des amis de longue date !",
+      "km": 100,
+      "prerequis": []
+    },
+    {
+      "id": "m005",
+      "type": "sequentiel",
+      "categorie": "secret",
+      "couleur": "#D4AF37",
+      "emoji": "⭐",
+      "titre": "Mission secrète — Le premier camping",
+      "description": "Trouvez Didier et demandez-lui le nom du premier camping où il est parti avec Isabelle.",
+      "km": 150,
+      "prerequis": ["m001", "m004"]
+    },
+    {
+      "id": "m006",
+      "type": "sequentiel",
+      "categorie": "social",
+      "couleur": "#E8834A",
+      "emoji": "🟠",
+      "titre": "Photo avec les 4 témoins",
+      "description": "Rassemblez les 4 témoins et prenez une photo de groupe !",
+      "km": 200,
+      "prerequis": ["m002", "m003"]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "badges": [
+    {
+      "id": "b001",
+      "emoji": "🏝️",
+      "nom": "Explorateur",
+      "description": "Première mission accomplie !",
+      "condition": "missions",
+      "valeur": 1
+    },
+    {
+      "id": "b002",
+      "emoji": "🍹",
+      "nom": "Aventurier",
+      "description": "500 km parcourus",
+      "condition": "km",
+      "valeur": 500
+    },
+    {
+      "id": "b003",
+      "emoji": "🌺",
+      "nom": "Globe-trotter",
+      "description": "3 missions accomplies",
+      "condition": "missions",
+      "valeur": 3
+    },
+    {
+      "id": "b004",
+      "emoji": "🦜",
+      "nom": "Guide Tropical",
+      "description": "1000 km parcourus",
+      "condition": "km",
+      "valeur": 1000
+    },
+    {
+      "id": "b005",
+      "emoji": "✈️",
+      "nom": "Grand Voyageur",
+      "description": "Toutes les missions permanentes accomplies",
+      "condition": "missions",
+      "valeur": 4
+    },
+    {
+      "id": "b006",
+      "emoji": "👑",
+      "nom": "VIP du Paradis",
+      "description": "2000 km parcourus",
+      "condition": "km",
+      "valeur": 2000
+    }
+  ]
+}

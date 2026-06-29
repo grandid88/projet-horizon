@@ -48,10 +48,6 @@ body {
   display: none !important;
 }
 
-.screen.active {
-  display: flex;
-}
-
 /* ---------- SPLASH ---------- */
 
 .logo-container {
