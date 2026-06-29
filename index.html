@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/passport.css" />
     <link rel="stylesheet" href="css/boarding.css" />
     <link rel="stylesheet" href="css/app.css" />
-    <link rel="stylesheet" href="css/pin-mission.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,6 +20,41 @@
     <style>
       body { overflow-y: auto !important; }
       .screen { height: auto !important; min-height: 100vh; }
+    </style>
+
+    <style>
+    /* PIN Mission — inline pour éviter les problèmes MIME */
+    .mission-pin-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; padding: 20px;
+    }
+    .mission-pin-card {
+      width: 100%; max-width: 320px;
+      background: linear-gradient(145deg, #1a3a6e, #112444);
+      border: 1px solid rgba(212,175,55,0.3); border-radius: 20px;
+      padding: 24px 20px; text-align: center;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+    .mission-pin-title { font-size: 20px; font-weight: 700; color: #D4AF37; margin-bottom: 6px; }
+    .mission-pin-subtitle { font-size: 12px; color: rgba(255,255,255,0.45); margin-bottom: 20px; line-height: 1.4; }
+    .mission-pin-display { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; }
+    .mission-pin-dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(212,175,55,0.4); background: transparent; transition: all 0.2s; }
+    .mission-pin-dot.filled { background: #D4AF37; border-color: #D4AF37; box-shadow: 0 0 8px rgba(212,175,55,0.5); }
+    .mission-pin-dot.error { border-color: #C7745A; background: #C7745A; }
+    .mission-pin-error { height: 18px; font-size: 12px; color: #C7745A; font-weight: 600; margin-bottom: 16px; }
+    .mission-pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+    .mission-pin-key {
+      padding: 14px 0; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; background: rgba(255,255,255,0.05);
+      color: #F7F3EB; font-size: 20px; font-weight: 600; cursor: pointer;
+    }
+    .mission-pin-key:active { transform: scale(0.94); background: rgba(212,175,55,0.2); }
+    .btn-pin-cancel {
+      width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; background: transparent; color: rgba(255,255,255,0.35);
+      font-size: 13px; cursor: pointer;
+    }
     </style>
   </head>
 
