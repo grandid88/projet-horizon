@@ -229,15 +229,6 @@ async function showApp() {
   await Missions.load();
   renderApp();
 
-  /* Listener PIN — attaché UNE SEULE FOIS sur app-screen */
-  document.getElementById("app-screen").addEventListener("click", function(e) {
-    var btn = e.target.closest(".btn-mission[data-mission]");
-    if (!btn) return;
-    var missionId = btn.getAttribute("data-mission");
-    var mission   = Missions.data.find(function(m) { return m.id === missionId; });
-    if (mission) showPinMission(mission);
-  });
-
   /* Classement live */
   dbOnRanking(function(ranking) {
     renderRanking(ranking);
@@ -439,6 +430,15 @@ window.addEventListener("load", function() {
   console.log("✈ Projet HORIZON — Mission Paradis v4.1");
   generateBarcode();
 
+  /* Listener PIN — attaché une seule fois au démarrage */
+  document.addEventListener("click", function(e) {
+    var btn = e.target.closest(".btn-mission[data-mission]");
+    if (!btn) return;
+    var missionId = btn.getAttribute("data-mission");
+    var mission   = Missions.data.find(function(m) { return m.id === missionId; });
+    if (mission) showPinMission(mission);
+  });
+
   var passenger = Storage.load();
   if (passenger) { showApp(); return; }
 
@@ -457,6 +457,7 @@ window.addEventListener("load", function() {
    VALIDATION PAR CODE PIN
 ========================================================== */
 
+window.showPinMission = showPinMission;
 function showPinMission(mission) {
   var pinValue = "";
   var overlay  = document.createElement("div");
