@@ -229,6 +229,15 @@ async function showApp() {
   await Missions.load();
   renderApp();
 
+  /* Listener PIN — attaché UNE SEULE FOIS sur app-screen */
+  document.getElementById("app-screen").addEventListener("click", function(e) {
+    var btn = e.target.closest(".btn-mission[data-mission]");
+    if (!btn) return;
+    var missionId = btn.getAttribute("data-mission");
+    var mission   = Missions.data.find(function(m) { return m.id === missionId; });
+    if (mission) showPinMission(mission);
+  });
+
   /* Classement live */
   dbOnRanking(function(ranking) {
     renderRanking(ranking);
@@ -299,15 +308,7 @@ function renderApp() {
     '</div>'
   ].join("");
 
-  /* Listeners missions — délégation sur app-screen pour survivre aux re-rendus */
-  var appScreen = document.getElementById("app-screen");
-  appScreen.onclick = function(e) {
-    var btn = e.target.closest(".btn-mission[data-mission]");
-    if (!btn) return;
-    var missionId = btn.getAttribute("data-mission");
-    var mission   = Missions.data.find(function(m) { return m.id === missionId; });
-    if (mission) showPinMission(mission);
-  };
+  /* Listener PIN géré dans showApp() — pas besoin ici */
 }
 
 function missionCard(m, done) {
