@@ -71,3 +71,13 @@ const Missions = {
     return newBadges;
   }
 };
+
+  /* --- Valider une mission flash --- */
+  completeFlash(flash) {
+    var passenger = Storage.load();
+    if (!passenger || passenger.missions.includes(flash.id)) return null;
+    Storage.completeMission(flash.id);
+    Storage.addKm(flash.km);
+    var newBadges = this.checkBadges();
+    return { passenger: Storage.load(), mission: flash, newBadges };
+  }

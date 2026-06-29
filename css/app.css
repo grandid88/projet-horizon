@@ -489,3 +489,67 @@
 .btn-reward-close:hover {
   transform: translateY(-2px);
 }
+
+/* ==========================================================
+   MISSION FLASH
+========================================================== */
+
+.flash-banner {
+  width: calc(100% - 40px);
+  max-width: 440px;
+  margin: 14px 0 0;
+  background: linear-gradient(135deg, rgba(216,78,143,0.25), rgba(199,116,90,0.25));
+  border: 2px solid var(--fuchsia);
+  border-radius: 16px;
+  padding: 16px;
+  animation: flashPulse 1.5s ease infinite;
+  box-shadow: 0 0 30px rgba(216,78,143,0.3);
+}
+
+@keyframes flashPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(216,78,143,0.3); }
+  50%       { box-shadow: 0 0 40px rgba(216,78,143,0.6); }
+}
+
+.flash-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--fuchsia);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.flash-title {
+  font-family: var(--title-font);
+  font-size: 20px;
+  color: var(--ivory);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.flash-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 12px;
+}
+
+.flash-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.flash-km {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.flash-countdown {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--fuchsia);
+  flex: 1;
+}
