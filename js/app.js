@@ -299,14 +299,15 @@ function renderApp() {
     '</div>'
   ].join("");
 
-  /* Listeners missions */
-  document.querySelectorAll(".btn-mission[data-mission]").forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      var missionId = btn.getAttribute("data-mission");
-      var mission   = Missions.data.find(function(m) { return m.id === missionId; });
-      if (mission) showPinMission(mission);
-    });
-  });
+  /* Listeners missions — délégation sur app-screen pour survivre aux re-rendus */
+  var appScreen = document.getElementById("app-screen");
+  appScreen.onclick = function(e) {
+    var btn = e.target.closest(".btn-mission[data-mission]");
+    if (!btn) return;
+    var missionId = btn.getAttribute("data-mission");
+    var mission   = Missions.data.find(function(m) { return m.id === missionId; });
+    if (mission) showPinMission(mission);
+  };
 }
 
 function missionCard(m, done) {
