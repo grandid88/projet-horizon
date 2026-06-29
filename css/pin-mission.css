@@ -1,0 +1,125 @@
+/* ==========================================================
+   PROJET HORIZON — pin-mission.css
+   Mini PIN de validation des missions
+   Version 1.0
+========================================================== */
+
+.mission-pin-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  animation: fadeIn 0.25s ease;
+  padding: 20px;
+}
+
+.mission-pin-card {
+  width: 100%;
+  max-width: 320px;
+  background: linear-gradient(145deg, #1a3a6e, #112444);
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.mission-pin-title {
+  font-family: var(--title-font);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.mission-pin-subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.mission-pin-display {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.mission-pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(212,175,55,0.4);
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.mission-pin-dot.filled {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 8px rgba(212,175,55,0.5);
+}
+
+.mission-pin-dot.error {
+  border-color: var(--terracotta);
+  background: var(--terracotta);
+  animation: shake 0.4s ease;
+}
+
+.mission-pin-error {
+  height: 18px;
+  font-size: 12px;
+  color: var(--terracotta);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.mission-pin-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mission-pin-key {
+  padding: 14px 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  color: var(--ivory);
+  font-family: var(--text-font);
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.mission-pin-key:hover  { background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.4); }
+.mission-pin-key:active { transform: scale(0.94); }
+.mission-pin-key.del    { color: var(--sage); font-size: 16px; }
+
+.btn-pin-cancel {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(255,255,255,0.35);
+  font-family: var(--text-font);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-pin-cancel:hover { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.25); }
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px); }
+}

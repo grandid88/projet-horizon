@@ -1,7 +1,7 @@
 /* ==========================================================
    PROJET HORIZON — dashboard.css
    Dashboard TV — Format paysage
-   Version 1.0
+   Thème Tropical Vintage Ivoire — Version 2.0
 ========================================================== */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -10,8 +10,8 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #080f1e 0%, #0d1e3a 50%, #080f1e 100%);
-  color: #F7F3EB;
+  background: linear-gradient(135deg, #F6EAD7 0%, #EFE4CE 50%, #E7DDCF 100%);
+  color: #2C3E25;
   overflow: hidden;
 }
 
@@ -24,8 +24,8 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 14px 32px;
-  background: linear-gradient(90deg, rgba(13,30,58,0.95), rgba(19,35,63,0.95));
-  border-bottom: 1px solid rgba(212,175,55,0.25);
+  background: rgba(61,107,79,0.95);
+  border-bottom: 3px solid #C9A84C;
   height: 64px;
 }
 
@@ -33,7 +33,7 @@ html, body {
   font-family: "Cormorant Garamond", serif;
   font-size: 22px;
   font-weight: 700;
-  color: #D4AF37;
+  color: #E8C97A;
   letter-spacing: 2px;
 }
 
@@ -47,14 +47,14 @@ html, body {
   font-family: "Cormorant Garamond", serif;
   font-size: 26px;
   font-weight: 700;
-  color: #fff;
+  color: #F6EAD7;
   letter-spacing: 4px;
   text-transform: uppercase;
 }
 
 .tv-title-sub {
   font-size: 12px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(246,234,215,0.6);
   letter-spacing: 2px;
   margin-top: 2px;
 }
@@ -65,7 +65,7 @@ html, body {
   gap: 8px;
   font-size: 13px;
   font-weight: 700;
-  color: #8FAF9A;
+  color: #E8C97A;
   letter-spacing: 2px;
 }
 
@@ -73,8 +73,13 @@ html, body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #8FAF9A;
+  background: #E8C97A;
   animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.8); }
 }
 
 /* ==========================================================
@@ -82,8 +87,8 @@ html, body {
 ========================================================== */
 
 .tv-flash-banner {
-  background: linear-gradient(90deg, rgba(216,78,143,0.25), rgba(199,116,90,0.25));
-  border-bottom: 2px solid #D84E8F;
+  background: linear-gradient(90deg, rgba(196,112,74,0.15), rgba(201,168,76,0.15));
+  border-bottom: 2px solid #C4704A;
   padding: 10px 32px;
   display: flex;
   align-items: center;
@@ -93,11 +98,16 @@ html, body {
 
 .tv-flash-banner.hidden { display: none; }
 
+@keyframes flashPulse {
+  0%,100% { background: linear-gradient(90deg, rgba(196,112,74,0.12), rgba(201,168,76,0.12)); }
+  50%      { background: linear-gradient(90deg, rgba(196,112,74,0.25), rgba(201,168,76,0.25)); }
+}
+
 .tv-flash-label {
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 2px;
-  color: #D84E8F;
+  color: #C4704A;
   white-space: nowrap;
   text-transform: uppercase;
 }
@@ -106,13 +116,13 @@ html, body {
   font-family: "Cormorant Garamond", serif;
   font-size: 22px;
   font-weight: 700;
-  color: #fff;
+  color: #2C3E25;
   flex: 1;
 }
 
 .tv-flash-desc {
   font-size: 13px;
-  color: rgba(255,255,255,0.6);
+  color: #8B7355;
   flex: 1;
 }
 
@@ -126,21 +136,16 @@ html, body {
 .tv-flash-km {
   font-size: 22px;
   font-weight: 800;
-  color: #D4AF37;
+  color: #A8863A;
 }
 
 .tv-flash-timer {
   font-size: 28px;
   font-weight: 800;
-  color: #D84E8F;
+  color: #C4704A;
   font-variant-numeric: tabular-nums;
   min-width: 80px;
   text-align: right;
-}
-
-@keyframes flashPulse {
-  0%,100% { background: linear-gradient(90deg, rgba(216,78,143,0.2), rgba(199,116,90,0.2)); }
-  50%      { background: linear-gradient(90deg, rgba(216,78,143,0.35), rgba(199,116,90,0.35)); }
 }
 
 /* ==========================================================
@@ -156,34 +161,33 @@ html, body {
   overflow: hidden;
 }
 
-.tv-flash-banner ~ .tv-grid {
-  height: calc(100vh - 64px - 52px);
-}
-
 /* ==========================================================
    CARDS
 ========================================================== */
 
 .tv-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(253,250,244,0.85);
+  border: 1px solid rgba(201,168,76,0.25);
   border-radius: 16px;
   padding: 16px;
   overflow: hidden;
+  box-shadow: 0 4px 16px rgba(92,74,42,0.1);
+  backdrop-filter: blur(4px);
 }
 
 .tv-card-title {
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
+  color: #8B7355;
   margin-bottom: 14px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  font-weight: 600;
 }
 
 .tv-loading {
-  color: rgba(255,255,255,0.25);
+  color: #8B7355;
   font-size: 13px;
   font-style: italic;
   text-align: center;
@@ -194,15 +198,8 @@ html, body {
    CLASSEMENT JOUEURS
 ========================================================== */
 
-.tv-ranking {
-  display: flex;
-  flex-direction: column;
-}
-
-#tv-ranking-list {
-  flex: 1;
-  overflow: hidden;
-}
+.tv-ranking { display: flex; flex-direction: column; }
+#tv-ranking-list { flex: 1; overflow: hidden; }
 
 .tv-rank-row {
   display: flex;
@@ -214,43 +211,24 @@ html, body {
   transition: background 0.3s;
 }
 
-.tv-rank-row:nth-child(1) { background: rgba(255,215,0,0.1); }
-.tv-rank-row:nth-child(2) { background: rgba(192,192,192,0.07); }
-.tv-rank-row:nth-child(3) { background: rgba(205,127,50,0.07); }
+.tv-rank-row:nth-child(1) { background: rgba(201,168,76,0.12); }
+.tv-rank-row:nth-child(2) { background: rgba(92,74,42,0.06); }
+.tv-rank-row:nth-child(3) { background: rgba(196,112,74,0.06); }
 
-.tv-rank-pos {
-  font-size: 18px;
-  width: 32px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.tv-rank-info {
-  flex: 1;
-  min-width: 0;
-}
+.tv-rank-pos { font-size: 18px; width: 32px; text-align: center; flex-shrink: 0; }
+.tv-rank-info { flex: 1; min-width: 0; }
 
 .tv-rank-name {
   font-size: 15px;
   font-weight: 600;
-  color: #F7F3EB;
+  color: #2C3E25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.tv-rank-table {
-  font-size: 11px;
-  color: rgba(255,255,255,0.35);
-  margin-top: 1px;
-}
-
-.tv-rank-km {
-  font-size: 15px;
-  font-weight: 700;
-  color: #D4AF37;
-  flex-shrink: 0;
-}
+.tv-rank-table { font-size: 11px; color: #8B7355; margin-top: 1px; }
+.tv-rank-km    { font-size: 15px; font-weight: 700; color: #A8863A; flex-shrink: 0; }
 
 /* ==========================================================
    COLONNE CENTRE
@@ -271,35 +249,37 @@ html, body {
 }
 
 .tv-stat {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(253,250,244,0.85);
+  border: 1px solid rgba(201,168,76,0.25);
   border-radius: 14px;
   padding: 14px;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(92,74,42,0.08);
 }
 
 .tv-stat-value {
   font-family: "Cormorant Garamond", serif;
   font-size: 38px;
   font-weight: 700;
-  color: #D4AF37;
+  color: #3D6B4F;
   line-height: 1;
   transition: all 0.5s ease;
 }
 
 .tv-stat-label {
   font-size: 11px;
-  color: rgba(255,255,255,0.35);
+  color: #8B7355;
   margin-top: 4px;
   letter-spacing: 0.5px;
 }
 
 /* Avion */
 .tv-plane-section {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(253,250,244,0.85);
+  border: 1px solid rgba(201,168,76,0.25);
   border-radius: 14px;
   padding: 16px 20px;
+  box-shadow: 0 4px 12px rgba(92,74,42,0.08);
 }
 
 .tv-plane-header {
@@ -308,25 +288,22 @@ html, body {
   margin-bottom: 10px;
 }
 
-.tv-plane-label {
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: 1px;
-}
+.tv-plane-label { font-size: 12px; color: #8B7355; letter-spacing: 1px; }
 
 .tv-plane-track {
   position: relative;
   height: 36px;
-  background: rgba(255,255,255,0.06);
+  background: rgba(201,168,76,0.12);
   border-radius: 50px;
   overflow: visible;
   margin-bottom: 8px;
+  border: 1px solid rgba(201,168,76,0.2);
 }
 
 .tv-plane-progress {
   position: absolute;
   left: 0; top: 0; bottom: 0;
-  background: linear-gradient(90deg, #C7745A, #D84E8F);
+  background: linear-gradient(90deg, #3D6B4F, #C9A84C);
   border-radius: 50px;
   transition: width 1s ease;
   width: 0%;
@@ -339,22 +316,19 @@ html, body {
   font-size: 22px;
   transition: left 1s ease;
   left: 0%;
-  filter: drop-shadow(0 0 8px rgba(212,175,55,0.6));
+  filter: drop-shadow(0 0 6px rgba(201,168,76,0.5));
   z-index: 2;
 }
 
 .tv-plane-pct {
   font-size: 12px;
-  color: rgba(255,255,255,0.4);
+  color: #8B7355;
   text-align: center;
   letter-spacing: 1px;
 }
 
 /* Badges */
-.tv-badges-section {
-  flex: 1;
-  overflow: hidden;
-}
+.tv-badges-section { flex: 1; overflow: hidden; }
 
 .tv-badges-list {
   display: flex;
@@ -368,18 +342,19 @@ html, body {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(212,175,55,0.1);
-  border: 1px solid rgba(212,175,55,0.25);
+  background: rgba(61,107,79,0.08);
+  border: 1px solid rgba(61,107,79,0.25);
   border-radius: 50px;
   padding: 5px 12px;
   font-size: 13px;
-  color: #D4AF37;
+  color: #3D6B4F;
   animation: slideUp 0.4s ease both;
+  font-weight: 600;
 }
 
 .tv-badge-chip .badge-who {
   font-size: 11px;
-  color: rgba(255,255,255,0.4);
+  color: #8B7355;
   font-weight: 400;
 }
 
@@ -387,11 +362,7 @@ html, body {
    CLASSEMENT TABLES
 ========================================================== */
 
-.tv-tables {
-  display: flex;
-  flex-direction: column;
-}
-
+.tv-tables { display: flex; flex-direction: column; }
 #tv-tables-list { flex: 1; overflow: hidden; }
 
 .tv-table-row {
@@ -401,41 +372,19 @@ html, body {
   padding: 8px 10px;
   border-radius: 10px;
   margin-bottom: 5px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(246,234,215,0.5);
 }
 
-.tv-table-pos {
-  font-size: 16px;
-  width: 28px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
+.tv-table-pos { font-size: 16px; width: 28px; text-align: center; flex-shrink: 0; }
 .tv-table-info { flex: 1; }
-
-.tv-table-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #F7F3EB;
-}
-
-.tv-table-count {
-  font-size: 11px;
-  color: rgba(255,255,255,0.35);
-  margin-top: 1px;
-}
-
-.tv-table-km {
-  font-size: 14px;
-  font-weight: 700;
-  color: #8FAF9A;
-  flex-shrink: 0;
-}
+.tv-table-name { font-size: 14px; font-weight: 600; color: #2C3E25; }
+.tv-table-count { font-size: 11px; color: #8B7355; margin-top: 1px; }
+.tv-table-km { font-size: 14px; font-weight: 700; color: #A8863A; flex-shrink: 0; }
 
 .tv-table-bar-bg {
   width: 100%;
   height: 3px;
-  background: rgba(255,255,255,0.06);
+  background: rgba(201,168,76,0.15);
   border-radius: 10px;
   margin-top: 5px;
   overflow: hidden;
@@ -443,20 +392,15 @@ html, body {
 
 .tv-table-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #8FAF9A, #D4AF37);
+  background: linear-gradient(90deg, #3D6B4F, #C9A84C);
   border-radius: 10px;
   transition: width 1s ease;
 }
 
-/* ==========================================================
-   ANIMATION COMPTEUR
-========================================================== */
-
+/* Animation compteur */
 @keyframes countUp {
   from { transform: translateY(10px); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
 }
 
-.tv-stat-value.updated {
-  animation: countUp 0.4s ease;
-}
+.tv-stat-value.updated { animation: countUp 0.4s ease; }
