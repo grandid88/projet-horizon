@@ -1,99 +1,78 @@
 /* ==========================================================
    PROJET HORIZON — app.js
-   Version 4.1 — Fichier unique avec Firebase intégré
+   Version 5.0 — Sans module ES6, Firebase via CDN global
 ========================================================== */
 
 /* ==========================================================
-   FIREBASE
+   FIREBASE — chargé via script CDN dans index.html
+   On utilise les API compat (v8) accessibles globalement
 ========================================================== */
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, serverTimestamp }
-  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+var db;
 
-const firebaseConfig = {
-  apiKey:            "AIzaSyCINy6uUXI-mY9d4pKB9JIDQM-J9yEBG10",
-  authDomain:        "projet-horizon-8746b.firebaseapp.com",
-  databaseURL:       "https://projet-horizon-8746b-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId:         "projet-horizon-8746b",
-  storageBucket:     "projet-horizon-8746b.firebasestorage.app",
-  messagingSenderId: "864203948873",
-  appId:             "1:864203948873:web:1fb41194ab8eff11239098"
-};
+function initFirebase() {
+  var firebaseConfig = {
+    apiKey:            "AIzaSyCINy6uUXI-mY9d4pKB9JIDQM-J9yEBG10",
+    authDomain:        "projet-horizon-8746b.firebaseapp.com",
+    databaseURL:       "https://projet-horizon-8746b-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId:         "projet-horizon-8746b",
+    storageBucket:     "projet-horizon-8746b.firebasestorage.app",
+    messagingSenderId: "864203948873",
+    appId:             "1:864203948873:web:1fb41194ab8eff11239098"
+  };
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.database();
+}
 
-const firebaseApp = initializeApp(firebaseConfig);
-const db          = getDatabase(firebaseApp);
-
-/* --- Sauvegarder un passager sur Firebase --- */
-async function dbSavePassenger(passenger) {
+function dbSavePassenger(passenger) {
   var key = (passenger.prenom + "_" + passenger.table)
     .toLowerCase().replace(/[^a-z0-9_]/g, "_");
-  await set(ref(db, "passagers/" + key), {
+  return db.ref("passagers/" + key).set({
     prenom:    passenger.prenom,
     table:     passenger.table,
     km:        passenger.km,
     missions:  passenger.missions.length,
-    updatedAt: serverTimestamp()
+    updatedAt: firebase.database.ServerValue.TIMESTAMP
   });
 }
 
-/* --- Écouter le classement en temps réel --- */
 function dbOnRanking(callback) {
-  onValue(ref(db, "passagers"), function(snapshot) {
+  db.ref("passagers").on("value", function(snapshot) {
     var data = snapshot.val();
     if (!data) { callback([]); return; }
-    var ranking = Object.values(data)
-      .sort(function(a, b) { return b.km - a.km; })
-      .slice(0, 10);
+    var ranking = Object.values(data).sort(function(a,b){ return b.km - a.km; }).slice(0,10);
     callback(ranking);
   });
 }
 
-/* --- Écouter les missions flash --- */
 function dbOnFlash(callback) {
-  onValue(ref(db, "flash_mission"), function(snapshot) {
+  db.ref("flash_mission").on("value", function(snapshot) {
     callback(snapshot.val());
   });
 }
 
-/* --- Déclencher une mission flash (admin) --- */
-async function dbTriggerFlash(mission) {
-  await set(ref(db, "flash_mission"), {
-    id:          mission.id,
-    titre:       mission.titre,
-    description: mission.description,
-    km:          mission.km,
-    duree:       mission.duree,
-    active:      true,
-    startedAt:   Date.now()
-  });
-}
-
-/* --- Clôturer une mission flash --- */
-async function dbCloseFlash() {
-  await set(ref(db, "flash_mission"), null);
-}
-
 /* ==========================================================
-   STORAGE (localStorage)
+   STORAGE
 ========================================================== */
 
-const Storage = {
+var Storage = {
   KEY: "horizon_passenger",
-  save(data)   { localStorage.setItem(this.KEY, JSON.stringify(data)); },
-  load()       { var r = localStorage.getItem(this.KEY); return r ? JSON.parse(r) : null; },
-  clear()      { localStorage.removeItem(this.KEY); },
-  createPassenger(prenom, table) {
-    var p = { prenom, table, km: 0, badges: [], missions: [], createdAt: Date.now() };
+  save: function(data)   { localStorage.setItem(this.KEY, JSON.stringify(data)); },
+  load: function()       { var r = localStorage.getItem(this.KEY); return r ? JSON.parse(r) : null; },
+  clear: function()      { localStorage.removeItem(this.KEY); },
+  createPassenger: function(prenom, table) {
+    var p = { prenom: prenom, table: table, km: 0, badges: [], missions: [], createdAt: Date.now() };
     this.save(p); return p;
   },
-  addKm(n)     { var p = this.load(); if (!p) return null; p.km += n; this.save(p); return p; },
-  completeMission(id) {
+  addKm: function(n) {
+    var p = this.load(); if (!p) return null; p.km += n; this.save(p); return p;
+  },
+  completeMission: function(id) {
     var p = this.load(); if (!p) return null;
     if (!p.missions.includes(id)) p.missions.push(id);
     this.save(p); return p;
   },
-  addBadge(id) {
+  addBadge: function(id) {
     var p = this.load(); if (!p) return null;
     if (!p.badges.includes(id)) p.badges.push(id);
     this.save(p); return p;
@@ -104,48 +83,51 @@ const Storage = {
    MISSIONS
 ========================================================== */
 
-const Missions = {
+var Missions = {
   data: [], badges: [],
 
-  async load() {
-    var [mRes, bRes] = await Promise.all([
-      fetch("data/missions.json"), fetch("data/badges.json")
-    ]);
-    this.data   = (await mRes.json()).missions;
-    this.badges = (await bRes.json()).badges;
+  load: function() {
+    return Promise.all([
+      fetch("data/missions.json").then(function(r){ return r.json(); }),
+      fetch("data/badges.json").then(function(r){ return r.json(); })
+    ]).then(function(results) {
+      Missions.data   = results[0].missions;
+      Missions.badges = results[1].badges;
+    });
   },
 
-  getAvailable(p) {
+  getAvailable: function(p) {
     return this.data.filter(function(m) {
       if (p.missions.includes(m.id)) return false;
-      if (m.prerequis.length === 0)  return true;
+      if (m.type === "flash") return false;
+      if (!m.prerequis || m.prerequis.length === 0) return true;
       return m.prerequis.every(function(pr) { return p.missions.includes(pr); });
     });
   },
 
-  getCompleted(p) {
+  getCompleted: function(p) {
     return this.data.filter(function(m) { return p.missions.includes(m.id); });
   },
 
-  complete(missionId) {
+  complete: function(missionId) {
     var p = Storage.completeMission(missionId);
     var m = this.data.find(function(x) { return x.id === missionId; });
     if (!m) return null;
     Storage.addKm(m.km);
     var newBadges = this.checkBadges();
-    return { passenger: Storage.load(), mission: m, newBadges };
+    return { passenger: Storage.load(), mission: m, newBadges: newBadges };
   },
 
-  completeFlash(flash) {
+  completeFlash: function(flash) {
     var p = Storage.load();
     if (!p || p.missions.includes(flash.id)) return null;
     Storage.completeMission(flash.id);
     Storage.addKm(flash.km);
     var newBadges = this.checkBadges();
-    return { passenger: Storage.load(), mission: flash, newBadges };
+    return { passenger: Storage.load(), mission: flash, newBadges: newBadges };
   },
 
-  checkBadges() {
+  checkBadges: function() {
     var p = Storage.load();
     var newBadges = [];
     this.badges.forEach(function(badge) {
@@ -208,11 +190,11 @@ function initRegister() {
   });
 
   if (btnRegister) {
-    btnRegister.addEventListener("click", async function() {
+    btnRegister.addEventListener("click", function() {
       var prenom = prenomInput ? prenomInput.value.trim() : "";
       if (!prenom || !selectedTable) return;
       var passenger = Storage.createPassenger(prenom, selectedTable);
-      await dbSavePassenger(passenger);
+      dbSavePassenger(passenger);
       showApp();
     });
   }
@@ -224,19 +206,12 @@ function initRegister() {
 
 var flashInterval = null;
 
-async function showApp() {
+function showApp() {
   showScreen("app-screen");
-  await Missions.load();
-  renderApp();
-
-  /* Classement live */
-  dbOnRanking(function(ranking) {
-    renderRanking(ranking);
-  });
-
-  /* Missions flash */
-  dbOnFlash(function(flash) {
-    handleFlashMission(flash);
+  Missions.load().then(function() {
+    renderApp();
+    dbOnRanking(function(ranking) { renderRanking(ranking); });
+    dbOnFlash(function(flash) { handleFlashMission(flash); });
   });
 }
 
@@ -248,7 +223,7 @@ function renderApp() {
   var myBadges   = Missions.badges.filter(function(b) { return passenger.badges.includes(b.id); });
   var pct        = Math.min(100, Math.round((passenger.km/2000)*100));
 
-  var container  = document.getElementById("app-screen");
+  var container = document.getElementById("app-screen");
   container.innerHTML = [
     '<div class="app-header">',
       '<span class="airline-logo">✈ I&D Airlines</span>',
@@ -257,7 +232,7 @@ function renderApp() {
     '<div class="passport-widget">',
       '<div class="passport-widget-header">',
         '<span>Passeport du Voyageur</span>',
-        '<span>🛂 '+completed.length+'/'+Missions.data.length+' missions</span>',
+        '<span>🛂 '+completed.length+'/'+Missions.data.filter(function(m){return m.type!=="flash";}).length+' missions</span>',
       '</div>',
       '<div class="passport-widget-body">',
         '<div class="passport-avatar">'+passenger.prenom.charAt(0).toUpperCase()+'</div>',
@@ -298,8 +273,6 @@ function renderApp() {
         : "",
     '</div>'
   ].join("");
-
-  /* Listener PIN géré dans showApp() — pas besoin ici */
 }
 
 function missionCard(m, done) {
@@ -312,9 +285,100 @@ function missionCard(m, done) {
     '<div class="mission-right">'+
       '<span class="mission-km">+'+m.km+' km</span>'+
       (done ? '<span class="mission-check">✅</span>'
-            : '<button class="btn-mission" data-mission="'+m.id+'" style="background:'+m.couleur+';color:white;">VALIDER</button>')+
+            : '<button class="btn-valider" data-mission="'+m.id+'" style="background:'+m.couleur+';color:white;padding:7px 14px;border:none;border-radius:50px;font-weight:700;font-size:12px;cursor:pointer;">VALIDER</button>')+
     '</div>'+
   '</div>';
+}
+
+/* ==========================================================
+   VALIDATION PAR CODE PIN
+========================================================== */
+
+function showPinMission(mission) {
+  var pinValue = "";
+
+  var overlay = document.createElement("div");
+  overlay.className = "mission-pin-overlay";
+
+  overlay.innerHTML =
+    '<div class="mission-pin-card">' +
+      '<div class="mission-pin-title">🔐 Code de validation</div>' +
+      '<div class="mission-pin-subtitle">Mission accomplie ? Obtenez le code auprès du DJ et saisissez-le ici.</div>' +
+      '<div class="mission-pin-display">' +
+        '<span class="mission-pin-dot" id="mpd-0"></span>' +
+        '<span class="mission-pin-dot" id="mpd-1"></span>' +
+        '<span class="mission-pin-dot" id="mpd-2"></span>' +
+        '<span class="mission-pin-dot" id="mpd-3"></span>' +
+      '</div>' +
+      '<div class="mission-pin-error" id="pin-mission-error"></div>' +
+      '<div class="mission-pin-keypad">' +
+        '<button class="mission-pin-key" data-k="1">1</button>' +
+        '<button class="mission-pin-key" data-k="2">2</button>' +
+        '<button class="mission-pin-key" data-k="3">3</button>' +
+        '<button class="mission-pin-key" data-k="4">4</button>' +
+        '<button class="mission-pin-key" data-k="5">5</button>' +
+        '<button class="mission-pin-key" data-k="6">6</button>' +
+        '<button class="mission-pin-key" data-k="7">7</button>' +
+        '<button class="mission-pin-key" data-k="8">8</button>' +
+        '<button class="mission-pin-key" data-k="9">9</button>' +
+        '<div></div>' +
+        '<button class="mission-pin-key" data-k="0">0</button>' +
+        '<button class="mission-pin-key del" data-k="del">⌫</button>' +
+      '</div>' +
+      '<button class="btn-pin-cancel" id="btn-pin-cancel">Annuler</button>' +
+    '</div>';
+
+  document.body.appendChild(overlay);
+
+  function updateDots() {
+    for (var i = 0; i < 4; i++) {
+      var dot = document.getElementById("mpd-" + i);
+      if (dot) {
+        dot.classList.toggle("filled", i < pinValue.length);
+        dot.classList.remove("error");
+      }
+    }
+    var errEl = document.getElementById("pin-mission-error");
+    if (errEl) errEl.textContent = "";
+  }
+
+  function checkCode() {
+    if (pinValue === String(mission.code)) {
+      document.body.removeChild(overlay);
+      var result = Missions.complete(mission.id);
+      if (result) {
+        dbSavePassenger(Storage.load());
+        showReward(result);
+      }
+    } else {
+      for (var i = 0; i < 4; i++) {
+        var dot = document.getElementById("mpd-"+i);
+        if (dot) dot.classList.add("error");
+      }
+      var errEl = document.getElementById("pin-mission-error");
+      if (errEl) errEl.textContent = "Code incorrect — réessayez !";
+      setTimeout(function() { pinValue = ""; updateDots(); }, 900);
+    }
+  }
+
+  overlay.querySelectorAll(".mission-pin-key").forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      var k = btn.getAttribute("data-k");
+      if (k === "del") { pinValue = pinValue.slice(0,-1); }
+      else if (pinValue.length < 4) { pinValue += k; }
+      updateDots();
+      if (pinValue.length === 4) checkCode();
+    });
+  });
+
+  var cancelBtn = document.getElementById("btn-pin-cancel");
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      document.body.removeChild(overlay);
+    });
+  }
 }
 
 /* ==========================================================
@@ -340,7 +404,8 @@ function renderRanking(ranking) {
       return '<div class="ranking-row'+(isMe?" me":"")+'">'+
         '<span class="rank-pos '+cls+'">'+pos+'</span>'+
         '<span class="rank-name">'+r.prenom+(isMe?' <b style="color:var(--gold)">(vous)</b>':"")+
-        (r.table ? ' <small style="opacity:.4">· '+r.table+'</small>' : "")+'</span>'+
+        (r.table?' <small style="opacity:.4">· '+r.table+'</small>':"")+
+        '</span>'+
         '<span class="rank-km">'+(r.km||0).toLocaleString()+' km</span>'+
       '</div>';
     }).join("");
@@ -370,12 +435,12 @@ function handleFlashMission(flash) {
     '<div class="flash-footer">'+
       '<span class="flash-km">+'+flash.km+' km</span>'+
       '<span class="flash-countdown">⏱ <span id="flash-timer">'+formatTime(endMs-Date.now())+'</span></span>'+
-      '<button class="btn-mission" id="btn-flash-validate" style="background:var(--fuchsia);color:white;">VALIDER</button>'+
+      '<button class="btn-mission" id="btn-flash-validate" style="background:var(--fuchsia);color:white;padding:7px 14px;border:none;border-radius:50px;font-weight:700;cursor:pointer;">VALIDER</button>'+
     '</div>';
 
   var appScreen = document.getElementById("app-screen");
-  var header    = appScreen.querySelector(".app-header");
-  if (header) header.after(banner); else appScreen.prepend(banner);
+  var header    = appScreen ? appScreen.querySelector(".app-header") : null;
+  if (header) header.after(banner); else if (appScreen) appScreen.prepend(banner);
 
   if (navigator.vibrate) navigator.vibrate([200,100,200]);
 
@@ -386,10 +451,10 @@ function handleFlashMission(flash) {
     if (rem<=0) { clearInterval(flashInterval); if (banner.parentNode) banner.remove(); }
   }, 1000);
 
-  document.getElementById("btn-flash-validate").addEventListener("click", async function() {
+  document.getElementById("btn-flash-validate").addEventListener("click", function() {
     var result = Missions.completeFlash(flash);
     if (result) {
-      await dbSavePassenger(Storage.load());
+      dbSavePassenger(Storage.load());
       banner.remove();
       clearInterval(flashInterval);
       showReward(result);
@@ -419,6 +484,7 @@ function showReward(result) {
   document.getElementById("btn-close-reward").addEventListener("click", function() {
     document.body.removeChild(overlay);
     renderApp();
+    dbOnRanking(function(ranking) { renderRanking(ranking); });
   });
 }
 
@@ -427,12 +493,14 @@ function showReward(result) {
 ========================================================== */
 
 window.addEventListener("load", function() {
-  console.log("✈ Projet HORIZON — Mission Paradis v4.1");
+  console.log("✈ Projet HORIZON — Mission Paradis v5.0");
+
+  initFirebase();
   generateBarcode();
 
-  /* Listener PIN — attaché une seule fois au démarrage */
+  /* Listener PIN global — sur document, jamais écrasé */
   document.addEventListener("click", function(e) {
-    var btn = e.target.closest(".btn-mission[data-mission]");
+    var btn = e.target.closest(".btn-valider[data-mission]");
     if (!btn) return;
     var missionId = btn.getAttribute("data-mission");
     var mission   = Missions.data.find(function(m) { return m.id === missionId; });
@@ -452,75 +520,3 @@ window.addEventListener("load", function() {
     });
   }, 2400);
 });
-
-/* ==========================================================
-   VALIDATION PAR CODE PIN
-========================================================== */
-
-window.showPinMission = showPinMission;
-function showPinMission(mission) {
-  var pinValue = "";
-  var overlay  = document.createElement("div");
-  overlay.className = "mission-pin-overlay";
-  overlay.id = "pin-mission-overlay";
-
-  overlay.innerHTML =
-    '<div class="mission-pin-card">' +
-      '<div class="mission-pin-title">🔐 Code de validation</div>' +
-      '<div class="mission-pin-subtitle">Mission accomplie ? Obtenez le code auprès du DJ et saisissez-le ici.</div>' +
-      '<div class="mission-pin-display">' +
-        '<span class="mission-pin-dot" id="mpd-0"></span>' +
-        '<span class="mission-pin-dot" id="mpd-1"></span>' +
-        '<span class="mission-pin-dot" id="mpd-2"></span>' +
-        '<span class="mission-pin-dot" id="mpd-3"></span>' +
-      '</div>' +
-      '<div class="mission-pin-error" id="pin-mission-error"></div>' +
-      '<div class="mission-pin-keypad">' +
-        [1,2,3,4,5,6,7,8,9,"",0,"⌫"].map(function(k) {
-          if (k === "") return '<div></div>';
-          return '<button class="mission-pin-key' + (k==="⌫"?" del":"") + '" data-k="'+k+'">'+k+'</button>';
-        }).join("") +
-      '</div>' +
-      '<button class="btn-pin-cancel" id="btn-pin-cancel">Annuler</button>' +
-    '</div>';
-
-  document.body.appendChild(overlay);
-
-  function updateDots() {
-    for (var i = 0; i < 4; i++) {
-      var dot = document.getElementById("mpd-" + i);
-      dot.classList.toggle("filled", i < pinValue.length);
-      dot.classList.remove("error");
-    }
-    document.getElementById("pin-mission-error").textContent = "";
-  }
-
-  function checkCode() {
-    if (pinValue === mission.code) {
-      document.body.removeChild(overlay);
-      var result = Missions.complete(mission.id);
-      if (result) {
-        dbSavePassenger(Storage.load());
-        showReward(result);
-      }
-    } else {
-      for (var i = 0; i < 4; i++) document.getElementById("mpd-"+i).classList.add("error");
-      document.getElementById("pin-mission-error").textContent = "Code incorrect — réessayez !";
-      setTimeout(function() { pinValue = ""; updateDots(); }, 900);
-    }
-  }
-
-  overlay.querySelectorAll(".mission-pin-key").forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      var k = btn.getAttribute("data-k");
-      if (k === "⌫") { pinValue = pinValue.slice(0,-1); }
-      else if (pinValue.length < 4) { pinValue += k; }
-      updateDots();
-      if (pinValue.length === 4) checkCode();
-    });
-  });
-
-  document.getElementById("btn-pin-cancel").addEventListener("click", function() {
-    document.body.removeChild(overlay);
-  });
-}

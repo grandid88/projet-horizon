@@ -5,35 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>I&D Airlines • Mission Paradis</title>
     <meta name="theme-color" content="#13233F" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
 
-    <!-- ======================================================
-         STYLES
-    ======================================================= -->
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="css/passport.css" />
     <link rel="stylesheet" href="css/boarding.css" />
     <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/pin-mission.css" />
 
-    <!-- ======================================================
-         GOOGLE FONTS
-    ======================================================= -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <style>
+      body { overflow-y: auto !important; }
+      .screen { height: auto !important; min-height: 100vh; }
+    </style>
   </head>
 
   <body>
     <main id="app">
 
-      <!-- ====================================================
-           ÉCRAN 1 — SPLASH SCREEN
-      ===================================================== -->
       <section id="splash-screen" class="screen active">
         <div class="logo-container">
           <div class="plane">✈</div>
@@ -42,36 +35,19 @@
         </div>
       </section>
 
-
-      <!-- ====================================================
-           ÉCRAN 2 — CARTE D'EMBARQUEMENT
-      ===================================================== -->
       <section id="boarding-screen" class="screen hidden">
-
         <div class="boarding-card">
-
-          <!-- En-tête colorée -->
           <div class="boarding-header">
             <span class="airline">I&amp;D Airlines</span>
             <span class="flight-num">Vol I&amp;D 260627</span>
           </div>
-
-          <!-- Corps -->
           <div class="boarding-body">
-
-            <!-- Destination -->
             <div class="boarding-destination">
               <div class="label">Destination</div>
               <div class="dest-name">Le Paradis</div>
               <div class="dest-sub">Mission Paradis • Soirée du 26 juin 2027</div>
             </div>
-
-            <!-- Séparateur perforé -->
-            <div class="perforation">
-              <div class="dashes"></div>
-            </div>
-
-            <!-- Infos vol -->
+            <div class="perforation"><div class="dashes"></div></div>
             <div class="boarding-infos">
               <div class="boarding-info-item">
                 <div class="info-label">Départ</div>
@@ -95,159 +71,50 @@
                 </div>
               </div>
             </div>
-
-            <!-- CTA -->
             <button class="btn-boarding" id="btn-start-adventure">
               ✈&nbsp; Commencer l'aventure
             </button>
-
           </div>
-
-          <!-- Code-barres décoratif -->
           <div class="boarding-barcode" id="barcode-deco"></div>
-
         </div>
-
       </section>
 
-
-      <!-- ====================================================
-           ÉCRAN 3 — ENREGISTREMENT
-      ===================================================== -->
       <section id="register-screen" class="screen hidden">
-
         <div class="register-card">
-
           <div class="register-title">
             <div class="step-label">✈ Enregistrement passager</div>
             <h2>Qui êtes-vous ?</h2>
             <p>Renseignez vos informations pour créer votre passeport de voyage</p>
           </div>
-
-          <!-- Prénom -->
           <div class="input-group">
             <label for="input-prenom">Votre prénom</label>
-            <input
-              type="text"
-              id="input-prenom"
-              placeholder="Ex : Sophie"
-              maxlength="24"
-              autocomplete="off"
-              autocorrect="off"
-              spellcheck="false"
-            />
+            <input type="text" id="input-prenom" placeholder="Ex : Sophie" maxlength="24" autocomplete="off" autocorrect="off" spellcheck="false" />
           </div>
-
-          <!-- Choix de la table -->
           <span class="table-label">Votre table</span>
           <div class="tables-grid">
-
-            <div class="table-option">
-              <input type="radio" name="table" id="t-maurice" value="Maurice" />
-              <label for="t-maurice">
-                <span class="t-emoji">🌴</span>
-                <span class="t-name">Maurice</span>
-              </label>
-            </div>
-
-            <div class="table-option">
-              <input type="radio" name="table" id="t-tahiti" value="Tahiti" />
-              <label for="t-tahiti">
-                <span class="t-emoji">🌺</span>
-                <span class="t-name">Tahiti</span>
-              </label>
-            </div>
-
-            <div class="table-option">
-              <input type="radio" name="table" id="t-martinique" value="Martinique" />
-              <label for="t-martinique">
-                <span class="t-emoji">🦜</span>
-                <span class="t-name">Martinique</span>
-              </label>
-            </div>
-
-            <div class="table-option">
-              <input type="radio" name="table" id="t-guadeloupe" value="Guadeloupe" />
-              <label for="t-guadeloupe">
-                <span class="t-emoji">🌊</span>
-                <span class="t-name">Guadeloupe</span>
-              </label>
-            </div>
-
-            <div class="table-option">
-              <input type="radio" name="table" id="t-seychelles" value="Seychelles" />
-              <label for="t-seychelles">
-                <span class="t-emoji">🐠</span>
-                <span class="t-name">Seychelles</span>
-              </label>
-            </div>
-
-            <div class="table-option">
-              <input type="radio" name="table" id="t-reunion" value="La Réunion" />
-              <label for="t-reunion">
-                <span class="t-emoji">🌋</span>
-                <span class="t-name">La Réunion</span>
-              </label>
-            </div>
-
-            <div class="table-option">
-              <input type="radio" name="table" id="t-nc" value="Nouvelle-Calédonie" />
-              <label for="t-nc">
-                <span class="t-emoji">🪸</span>
-                <span class="t-name">Nouvelle-Calédonie</span>
-              </label>
-            </div>
-
-            <div class="table-option">
-              <input type="radio" name="table" id="t-sl" value="Sainte-Lucie" />
-              <label for="t-sl">
-                <span class="t-emoji">🍹</span>
-                <span class="t-name">Sainte-Lucie</span>
-              </label>
-            </div>
-
-            <div class="table-option">
-              <input type="radio" name="table" id="t-mayotte" value="Mayotte" />
-              <label for="t-mayotte">
-                <span class="t-emoji">🐢</span>
-                <span class="t-name">Mayotte</span>
-              </label>
-            </div>
-
+            <div class="table-option"><input type="radio" name="table" id="t-maurice" value="Maurice" /><label for="t-maurice"><span class="t-emoji">🌴</span><span class="t-name">Maurice</span></label></div>
+            <div class="table-option"><input type="radio" name="table" id="t-tahiti" value="Tahiti" /><label for="t-tahiti"><span class="t-emoji">🌺</span><span class="t-name">Tahiti</span></label></div>
+            <div class="table-option"><input type="radio" name="table" id="t-martinique" value="Martinique" /><label for="t-martinique"><span class="t-emoji">🦜</span><span class="t-name">Martinique</span></label></div>
+            <div class="table-option"><input type="radio" name="table" id="t-guadeloupe" value="Guadeloupe" /><label for="t-guadeloupe"><span class="t-emoji">🌊</span><span class="t-name">Guadeloupe</span></label></div>
+            <div class="table-option"><input type="radio" name="table" id="t-seychelles" value="Seychelles" /><label for="t-seychelles"><span class="t-emoji">🐠</span><span class="t-name">Seychelles</span></label></div>
+            <div class="table-option"><input type="radio" name="table" id="t-reunion" value="La Réunion" /><label for="t-reunion"><span class="t-emoji">🌋</span><span class="t-name">La Réunion</span></label></div>
+            <div class="table-option"><input type="radio" name="table" id="t-nc" value="Nouvelle-Calédonie" /><label for="t-nc"><span class="t-emoji">🪸</span><span class="t-name">Nouvelle-Calédonie</span></label></div>
+            <div class="table-option"><input type="radio" name="table" id="t-sl" value="Sainte-Lucie" /><label for="t-sl"><span class="t-emoji">🍹</span><span class="t-name">Sainte-Lucie</span></label></div>
+            <div class="table-option"><input type="radio" name="table" id="t-mayotte" value="Mayotte" /><label for="t-mayotte"><span class="t-emoji">🐢</span><span class="t-name">Mayotte</span></label></div>
           </div>
-
-          <!-- Bouton -->
-          <button class="btn-register" id="btn-register">
-            🛂 Mon passeport est prêt !
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- ====================================================
-           ÉCRAN 4 — APP (placeholder Phase 3)
-      ===================================================== -->
-      <section id="app-screen" class="screen hidden">
-        <div style="text-align:center; color: var(--ivory);">
-          <div style="font-size:60px; margin-bottom:20px;">🌴</div>
-          <h2 style="font-family: var(--title-font); font-size:28px; color: var(--gold);">
-            Bienvenue à bord !
-          </h2>
-          <p id="welcome-msg" style="margin-top:12px; opacity:.7;"></p>
-          <p style="margin-top:8px; font-size:13px; opacity:.5;">
-            Phase 3 — Passeport & Missions (bientôt)
-          </p>
+          <button class="btn-register" id="btn-register">🛂 Mon passeport est prêt !</button>
         </div>
       </section>
+
+      <section id="app-screen" class="screen hidden"></section>
 
     </main>
 
+    <!-- Firebase SDK compat (v8) — pas de module ES6 -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-    <!-- ======================================================
-         JAVASCRIPT
-    ======================================================= -->
-    <script type="module" src="js/app.js"></script>
+    <!-- App -->
+    <script src="js/app.js"></script>
   </body>
 </html>
