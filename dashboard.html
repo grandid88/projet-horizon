@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I&D Airlines • Dashboard Mission Paradis</title>
+    <meta name="theme-color" content="#0a1828" />
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+
+    <!-- ================================================
+         HEADER
+    ================================================= -->
+    <header class="tv-header">
+      <div class="tv-logo">✈ I&D AIRLINES</div>
+      <div class="tv-title">
+        <span class="tv-title-main">MISSION PARADIS</span>
+        <span class="tv-title-sub">Vol I&D 260627 · 26 Juin 2027</span>
+      </div>
+      <div class="tv-live">
+        <span class="live-dot"></span>
+        <span>EN DIRECT</span>
+      </div>
+    </header>
+
+    <!-- ================================================
+         MISSION FLASH BANNER
+    ================================================= -->
+    <div id="tv-flash-banner" class="tv-flash-banner hidden">
+      <div class="tv-flash-label">⚡ MISSION FLASH</div>
+      <div class="tv-flash-title" id="tv-flash-title"></div>
+      <div class="tv-flash-desc" id="tv-flash-desc"></div>
+      <div class="tv-flash-meta">
+        <span class="tv-flash-km" id="tv-flash-km"></span>
+        <span class="tv-flash-timer" id="tv-flash-timer"></span>
+      </div>
+    </div>
+
+    <!-- ================================================
+         GRILLE PRINCIPALE
+    ================================================= -->
+    <main class="tv-grid">
+
+      <!-- COL GAUCHE : Classement joueurs -->
+      <section class="tv-card tv-ranking">
+        <div class="tv-card-title">🏆 Classement des Voyageurs</div>
+        <div id="tv-ranking-list">
+          <div class="tv-loading">En attente des voyageurs...</div>
+        </div>
+      </section>
+
+      <!-- COL CENTRE : Stats + Avion + Badges -->
+      <section class="tv-center">
+
+        <!-- Stats globales -->
+        <div class="tv-stats-row">
+          <div class="tv-stat">
+            <div class="tv-stat-value" id="tv-stat-voyageurs">0</div>
+            <div class="tv-stat-label">Voyageurs</div>
+          </div>
+          <div class="tv-stat">
+            <div class="tv-stat-value" id="tv-stat-missions">0</div>
+            <div class="tv-stat-label">Missions validées</div>
+          </div>
+          <div class="tv-stat">
+            <div class="tv-stat-value" id="tv-stat-km">0</div>
+            <div class="tv-stat-label">km cumulés</div>
+          </div>
+          <div class="tv-stat">
+            <div class="tv-stat-value" id="tv-stat-badges">0</div>
+            <div class="tv-stat-label">Badges débloqués</div>
+          </div>
+        </div>
+
+        <!-- Avion + progression -->
+        <div class="tv-plane-section">
+          <div class="tv-plane-header">
+            <span class="tv-plane-label">Paris CDG</span>
+            <span class="tv-plane-label">Île Maurice 🌴</span>
+          </div>
+          <div class="tv-plane-track">
+            <div class="tv-plane-progress" id="tv-plane-progress"></div>
+            <div class="tv-plane-icon" id="tv-plane-icon">✈</div>
+          </div>
+          <div class="tv-plane-pct" id="tv-plane-pct">0% du voyage accompli</div>
+        </div>
+
+        <!-- Derniers badges -->
+        <div class="tv-card tv-badges-section">
+          <div class="tv-card-title">🏅 Derniers badges débloqués</div>
+          <div id="tv-badges-list" class="tv-badges-list">
+            <div class="tv-loading">En attente de badges...</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- COL DROITE : Classement tables -->
+      <section class="tv-card tv-tables">
+        <div class="tv-card-title">🌴 Classement des Tables</div>
+        <div id="tv-tables-list">
+          <div class="tv-loading">En attente...</div>
+        </div>
+      </section>
+
+    </main>
+
+    <script type="module" src="js/dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,462 @@
+/* ==========================================================
+   PROJET HORIZON — dashboard.css
+   Dashboard TV — Format paysage
+   Version 1.0
+========================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #080f1e 0%, #0d1e3a 50%, #080f1e 100%);
+  color: #F7F3EB;
+  overflow: hidden;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.tv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background: linear-gradient(90deg, rgba(13,30,58,0.95), rgba(19,35,63,0.95));
+  border-bottom: 1px solid rgba(212,175,55,0.25);
+  height: 64px;
+}
+
+.tv-logo {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #D4AF37;
+  letter-spacing: 2px;
+}
+
+.tv-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tv-title-main {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.tv-title-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+.tv-live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8FAF9A;
+  letter-spacing: 2px;
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #8FAF9A;
+  animation: pulse 1.5s ease infinite;
+}
+
+/* ==========================================================
+   MISSION FLASH BANNER
+========================================================== */
+
+.tv-flash-banner {
+  background: linear-gradient(90deg, rgba(216,78,143,0.25), rgba(199,116,90,0.25));
+  border-bottom: 2px solid #D84E8F;
+  padding: 10px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  animation: flashPulse 1.5s ease infinite;
+}
+
+.tv-flash-banner.hidden { display: none; }
+
+.tv-flash-label {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #D84E8F;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.tv-flash-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  flex: 1;
+}
+
+.tv-flash-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  flex: 1;
+}
+
+.tv-flash-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.tv-flash-km {
+  font-size: 22px;
+  font-weight: 800;
+  color: #D4AF37;
+}
+
+.tv-flash-timer {
+  font-size: 28px;
+  font-weight: 800;
+  color: #D84E8F;
+  font-variant-numeric: tabular-nums;
+  min-width: 80px;
+  text-align: right;
+}
+
+@keyframes flashPulse {
+  0%,100% { background: linear-gradient(90deg, rgba(216,78,143,0.2), rgba(199,116,90,0.2)); }
+  50%      { background: linear-gradient(90deg, rgba(216,78,143,0.35), rgba(199,116,90,0.35)); }
+}
+
+/* ==========================================================
+   GRILLE PRINCIPALE
+========================================================== */
+
+.tv-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 260px;
+  gap: 16px;
+  padding: 16px;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+.tv-flash-banner ~ .tv-grid {
+  height: calc(100vh - 64px - 52px);
+}
+
+/* ==========================================================
+   CARDS
+========================================================== */
+
+.tv-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.tv-card-title {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.tv-loading {
+  color: rgba(255,255,255,0.25);
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* ==========================================================
+   CLASSEMENT JOUEURS
+========================================================== */
+
+.tv-ranking {
+  display: flex;
+  flex-direction: column;
+}
+
+#tv-ranking-list {
+  flex: 1;
+  overflow: hidden;
+}
+
+.tv-rank-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  margin-bottom: 4px;
+  transition: background 0.3s;
+}
+
+.tv-rank-row:nth-child(1) { background: rgba(255,215,0,0.1); }
+.tv-rank-row:nth-child(2) { background: rgba(192,192,192,0.07); }
+.tv-rank-row:nth-child(3) { background: rgba(205,127,50,0.07); }
+
+.tv-rank-pos {
+  font-size: 18px;
+  width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.tv-rank-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.tv-rank-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #F7F3EB;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tv-rank-table {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 1px;
+}
+
+.tv-rank-km {
+  font-size: 15px;
+  font-weight: 700;
+  color: #D4AF37;
+  flex-shrink: 0;
+}
+
+/* ==========================================================
+   COLONNE CENTRE
+========================================================== */
+
+.tv-center {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+/* Stats */
+.tv-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.tv-stat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+}
+
+.tv-stat-value {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: #D4AF37;
+  line-height: 1;
+  transition: all 0.5s ease;
+}
+
+.tv-stat-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* Avion */
+.tv-plane-section {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.tv-plane-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tv-plane-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+}
+
+.tv-plane-track {
+  position: relative;
+  height: 36px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50px;
+  overflow: visible;
+  margin-bottom: 8px;
+}
+
+.tv-plane-progress {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, #C7745A, #D84E8F);
+  border-radius: 50px;
+  transition: width 1s ease;
+  width: 0%;
+}
+
+.tv-plane-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: left 1s ease;
+  left: 0%;
+  filter: drop-shadow(0 0 8px rgba(212,175,55,0.6));
+  z-index: 2;
+}
+
+.tv-plane-pct {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Badges */
+.tv-badges-section {
+  flex: 1;
+  overflow: hidden;
+}
+
+.tv-badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.tv-badge-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(212,175,55,0.1);
+  border: 1px solid rgba(212,175,55,0.25);
+  border-radius: 50px;
+  padding: 5px 12px;
+  font-size: 13px;
+  color: #D4AF37;
+  animation: slideUp 0.4s ease both;
+}
+
+.tv-badge-chip .badge-who {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+}
+
+/* ==========================================================
+   CLASSEMENT TABLES
+========================================================== */
+
+.tv-tables {
+  display: flex;
+  flex-direction: column;
+}
+
+#tv-tables-list { flex: 1; overflow: hidden; }
+
+.tv-table-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  background: rgba(255,255,255,0.03);
+}
+
+.tv-table-pos {
+  font-size: 16px;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.tv-table-info { flex: 1; }
+
+.tv-table-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #F7F3EB;
+}
+
+.tv-table-count {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 1px;
+}
+
+.tv-table-km {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8FAF9A;
+  flex-shrink: 0;
+}
+
+.tv-table-bar-bg {
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.tv-table-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8FAF9A, #D4AF37);
+  border-radius: 10px;
+  transition: width 1s ease;
+}
+
+/* ==========================================================
+   ANIMATION COMPTEUR
+========================================================== */
+
+@keyframes countUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.tv-stat-value.updated {
+  animation: countUp 0.4s ease;
+}

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I&D Airlines • Admin</title>
+    <meta name="theme-color" content="#13233F" />
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        overflow-y: auto !important;
+      }
+      .screen {
+        height: auto !important;
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main id="app">
+      <!-- ================================================
+           ÉCRAN PIN
+      ================================================= -->
+      <section id="pin-screen" class="screen active">
+        <div class="pin-card">
+          <div class="pin-header">
+            <div class="pin-logo">✈</div>
+            <h1>Interface Admin</h1>
+            <p>I&D Airlines • Mission Paradis</p>
+          </div>
+
+          <div class="pin-label">Entrez votre code PIN</div>
+
+          <div class="pin-display">
+            <span class="pin-dot" id="dot-0"></span>
+            <span class="pin-dot" id="dot-1"></span>
+            <span class="pin-dot" id="dot-2"></span>
+            <span class="pin-dot" id="dot-3"></span>
+          </div>
+
+          <div id="pin-error" class="pin-error"></div>
+
+          <div class="pin-keypad">
+            <button class="pin-key" data-val="1">1</button>
+            <button class="pin-key" data-val="2">2</button>
+            <button class="pin-key" data-val="3">3</button>
+            <button class="pin-key" data-val="4">4</button>
+            <button class="pin-key" data-val="5">5</button>
+            <button class="pin-key" data-val="6">6</button>
+            <button class="pin-key" data-val="7">7</button>
+            <button class="pin-key" data-val="8">8</button>
+            <button class="pin-key" data-val="9">9</button>
+            <button class="pin-key pin-key-clear" data-val="clear">✕</button>
+            <button class="pin-key" data-val="0">0</button>
+            <button class="pin-key pin-key-del" data-val="del">⌫</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================
+           ÉCRAN ADMIN
+      ================================================= -->
+      <section id="admin-screen" class="screen hidden">
+        <!-- Header -->
+        <div class="app-header">
+          <span class="airline-logo">⚙️ Admin</span>
+          <span class="flight-info">I&D Airlines<br />Mission Paradis</span>
+        </div>
+
+        <!-- Stats live -->
+        <div class="admin-stats" id="admin-stats">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-voyageurs">0</div>
+            <div class="stat-label">Voyageurs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-missions">0</div>
+            <div class="stat-label">Missions validées</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-km">0</div>
+            <div class="stat-label">km cumulés</div>
+          </div>
+        </div>
+
+        <!-- Classement live -->
+        <div class="ranking-widget" id="admin-ranking">
+          <div class="ranking-title">🏆 Classement en direct</div>
+          <p style="color: rgba(255, 255, 255, 0.3); font-size: 13px">
+            Connexion en cours...
+          </p>
+        </div>
+
+        <!-- Missions Flash -->
+        <div class="admin-section">
+          <div class="admin-section-title">⚡ Déclencher une Mission Flash</div>
+
+          <div class="flash-form">
+            <div class="form-group">
+              <label>Titre de la mission</label>
+              <input
+                type="text"
+                id="flash-titre"
+                placeholder="Ex : Photographier la première danse !"
+              />
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input
+                type="text"
+                id="flash-desc"
+                placeholder="Ex : Capturez ce moment magique !"
+              />
+            </div>
+            <div class="form-row">
+              <div class="form-group half">
+                <label>Récompense (km)</label>
+                <input
+                  type="number"
+                  id="flash-km"
+                  value="150"
+                  min="50"
+                  max="500"
+                  step="50"
+                />
+              </div>
+              <div class="form-group half">
+                <label>Durée</label>
+                <select id="flash-duree">
+                  <option value="2">2 minutes</option>
+                  <option value="5" selected>5 minutes</option>
+                  <option value="10">10 minutes</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Missions prédéfinies -->
+            <div class="preset-label">Missions prédéfinies</div>
+            <div class="presets-grid" id="presets-grid"></div>
+
+            <button class="btn-flash-trigger" id="btn-trigger-flash">
+              ⚡ Déclencher la Mission Flash
+            </button>
+            <button class="btn-flash-close" id="btn-close-flash">
+              ✕ Clôturer la mission en cours
+            </button>
+          </div>
+
+          <!-- Statut mission flash active -->
+          <div class="flash-status" id="flash-status"></div>
+        </div>
+
+        <!-- Gestion missions permanentes -->
+        <div class="admin-section">
+          <div class="admin-section-title">🗺️ Missions permanentes</div>
+          <div id="admin-missions-list"></div>
+        </div>
+
+        <!-- Déconnexion -->
+        <div style="text-align: center; padding: 20px 0 40px">
+          <button class="btn-logout" id="btn-logout">Déconnexion</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="js/admin.js"></script>
+  </body>
+</html>
