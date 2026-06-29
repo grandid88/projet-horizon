@@ -1,29 +1,26 @@
 /* ==========================================================
    PROJET HORIZON — app.js
    Application principale — Chef d'orchestre des écrans
-   Version 1.0
+   Version 1.1
 ========================================================== */
 
 const Horizon = {
 
-  /* --- Références DOM --- */
   screens: {},
 
-  /* --- Init --- */
   init() {
-    console.log("✈ Projet HORIZON — Mission Paradis v1.0");
+    console.log("✈ Projet HORIZON — Mission Paradis v1.1");
 
     this.cacheDom();
     this.generateBarcode();
 
-    /* Si un passager est déjà enregistré → aller direct à l'app */
+    /* Si un passager existe déjà → aller direct à l'app */
     const passenger = Storage.load();
     if (passenger) {
       this.showApp(passenger);
       return;
     }
 
-    /* Sinon → Splash → Carte d'embarquement */
     this.launchSplashScreen();
   },
 
@@ -35,12 +32,15 @@ const Horizon = {
       app:      document.getElementById("app-screen")
     };
 
-    /* Bouton Carte d'embarquement → Enregistrement */
-    document.getElementById("btn-start-adventure")
-      .addEventListener("click", () => this.showRegister());
+    /* ✅ FIX : listener attaché via délégation sur le document
+       pour éviter le problème de timing avec les écrans cachés */
+    document.addEventListener("click", (e) => {
+      if (e.target.id === "btn-start-adventure") {
+        this.showRegister();
+      }
+    });
   },
 
-  /* --- Génération du code-barres décoratif --- */
   generateBarcode() {
     const container = document.getElementById("barcode-deco");
     if (!container) return;
@@ -93,5 +93,4 @@ const Horizon = {
 
 };
 
-/* --- Démarrage --- */
 window.addEventListener("load", () => Horizon.init());
