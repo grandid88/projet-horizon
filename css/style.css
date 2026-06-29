@@ -45,7 +45,11 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+.screen.active {
+  display: flex;
 }
 
 /* ---------- SPLASH ---------- */

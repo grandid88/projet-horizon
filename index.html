@@ -29,7 +29,6 @@
 
   <body>
     <main id="app">
-
       <!-- ====================================================
            ÉCRAN 1 — SPLASH SCREEN
       ===================================================== -->
@@ -41,14 +40,11 @@
         </div>
       </section>
 
-
       <!-- ====================================================
            ÉCRAN 2 — CARTE D'EMBARQUEMENT
       ===================================================== -->
       <section id="boarding-screen" class="screen hidden">
-
         <div class="boarding-card">
-
           <!-- En-tête colorée -->
           <div class="boarding-header">
             <span class="airline">I&amp;D Airlines</span>
@@ -57,12 +53,13 @@
 
           <!-- Corps -->
           <div class="boarding-body">
-
             <!-- Destination -->
             <div class="boarding-destination">
               <div class="label">Destination</div>
               <div class="dest-name">Le Paradis</div>
-              <div class="dest-sub">Mission Paradis • Soirée du 26 juin 2027</div>
+              <div class="dest-sub">
+                Mission Paradis • Soirée du 26 juin 2027
+              </div>
             </div>
 
             <!-- Séparateur perforé -->
@@ -99,28 +96,24 @@
             <button class="btn-boarding" id="btn-start-adventure">
               ✈&nbsp; Commencer l'aventure
             </button>
-
           </div>
 
           <!-- Code-barres décoratif -->
           <div class="boarding-barcode" id="barcode-deco"></div>
-
         </div>
-
       </section>
-
 
       <!-- ====================================================
            ÉCRAN 3 — ENREGISTREMENT
       ===================================================== -->
       <section id="register-screen" class="screen hidden">
-
         <div class="register-card">
-
           <div class="register-title">
             <div class="step-label">✈ Enregistrement passager</div>
             <h2>Qui êtes-vous ?</h2>
-            <p>Renseignez vos informations pour créer votre passeport de voyage</p>
+            <p>
+              Renseignez vos informations pour créer votre passeport de voyage
+            </p>
           </div>
 
           <!-- Prénom -->
@@ -140,7 +133,6 @@
           <!-- Choix de la table -->
           <span class="table-label">Votre table</span>
           <div class="tables-grid">
-
             <div class="table-option">
               <input type="radio" name="table" id="t-maurice" value="Maurice" />
               <label for="t-maurice">
@@ -158,7 +150,12 @@
             </div>
 
             <div class="table-option">
-              <input type="radio" name="table" id="t-martinique" value="Martinique" />
+              <input
+                type="radio"
+                name="table"
+                id="t-martinique"
+                value="Martinique"
+              />
               <label for="t-martinique">
                 <span class="t-emoji">🦜</span>
                 <span class="t-name">Martinique</span>
@@ -166,7 +163,12 @@
             </div>
 
             <div class="table-option">
-              <input type="radio" name="table" id="t-guadeloupe" value="Guadeloupe" />
+              <input
+                type="radio"
+                name="table"
+                id="t-guadeloupe"
+                value="Guadeloupe"
+              />
               <label for="t-guadeloupe">
                 <span class="t-emoji">🌊</span>
                 <span class="t-name">Guadeloupe</span>
@@ -174,7 +176,12 @@
             </div>
 
             <div class="table-option">
-              <input type="radio" name="table" id="t-seychelles" value="Seychelles" />
+              <input
+                type="radio"
+                name="table"
+                id="t-seychelles"
+                value="Seychelles"
+              />
               <label for="t-seychelles">
                 <span class="t-emoji">🐠</span>
                 <span class="t-name">Seychelles</span>
@@ -182,7 +189,12 @@
             </div>
 
             <div class="table-option">
-              <input type="radio" name="table" id="t-reunion" value="La Réunion" />
+              <input
+                type="radio"
+                name="table"
+                id="t-reunion"
+                value="La Réunion"
+              />
               <label for="t-reunion">
                 <span class="t-emoji">🌋</span>
                 <span class="t-name">La Réunion</span>
@@ -190,7 +202,12 @@
             </div>
 
             <div class="table-option">
-              <input type="radio" name="table" id="t-nc" value="Nouvelle-Calédonie" />
+              <input
+                type="radio"
+                name="table"
+                id="t-nc"
+                value="Nouvelle-Calédonie"
+              />
               <label for="t-nc">
                 <span class="t-emoji">🪸</span>
                 <span class="t-name">Nouvelle-Calédonie</span>
@@ -212,44 +229,43 @@
                 <span class="t-name">Mayotte</span>
               </label>
             </div>
-
           </div>
 
           <!-- Bouton -->
           <button class="btn-register" id="btn-register">
             🛂 Mon passeport est prêt !
           </button>
-
         </div>
-
       </section>
-
 
       <!-- ====================================================
            ÉCRAN 4 — APP (placeholder Phase 3)
       ===================================================== -->
       <section id="app-screen" class="screen hidden">
-        <div style="text-align:center; color: var(--ivory);">
-          <div style="font-size:60px; margin-bottom:20px;">🌴</div>
-          <h2 style="font-family: var(--title-font); font-size:28px; color: var(--gold);">
+        <div style="text-align: center; color: var(--ivory)">
+          <div style="font-size: 60px; margin-bottom: 20px">🌴</div>
+          <h2
+            style="
+              font-family: var(--title-font);
+              font-size: 28px;
+              color: var(--gold);
+            "
+          >
             Bienvenue à bord !
           </h2>
-          <p id="welcome-msg" style="margin-top:12px; opacity:.7;"></p>
-          <p style="margin-top:8px; font-size:13px; opacity:.5;">
+          <p id="welcome-msg" style="margin-top: 12px; opacity: 0.7"></p>
+          <p style="margin-top: 8px; font-size: 13px; opacity: 0.5">
             Phase 3 — Passeport & Missions (bientôt)
           </p>
         </div>
       </section>
-
     </main>
-
 
     <!-- ======================================================
          JAVASCRIPT
     ======================================================= -->
     <script src="js/storage.js"></script>
     <script src="js/passport.js"></script>
-    <script src="js/register.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
