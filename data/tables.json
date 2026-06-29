@@ -1,0 +1,13 @@
+{
+  "tables": [
+    { "id": "maurice",          "nom": "Maurice",          "emoji": "🌴" },
+    { "id": "tahiti",           "nom": "Tahiti",           "emoji": "🌺" },
+    { "id": "martinique",       "nom": "Martinique",       "emoji": "🦜" },
+    { "id": "guadeloupe",       "nom": "Guadeloupe",       "emoji": "🌊" },
+    { "id": "seychelles",       "nom": "Seychelles",       "emoji": "🐠" },
+    { "id": "la-reunion",       "nom": "La Réunion",       "emoji": "🌋" },
+    { "id": "nouvelle-caledonie","nom": "Nouvelle-Calédonie","emoji": "🪸" },
+    { "id": "sainte-lucie",     "nom": "Sainte-Lucie",     "emoji": "🍹" },
+    { "id": "mayotte",          "nom": "Mayotte",          "emoji": "🐢" }
+  ]
+}
