@@ -1,7 +1,7 @@
 /* ==========================================================
-   PROJET HORIZON
-   STYLE GENERAL
-   Version 1.1 — Fix mobile scroll
+   PROJET HORIZON — style.css
+   Thème Tropical Vintage Ivoire
+   Version 2.0
 ========================================================== */
 
 /* ---------- RESET ---------- */
@@ -12,68 +12,91 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 16px;
-}
+html { font-size: 16px; }
 
 body {
   font-family: var(--text-font);
-  background: linear-gradient(180deg, var(--navy), #1b3156);
-  color: var(--ivory);
+  background: var(--ivory-main);
+  color: var(--text-dark);
   min-height: 100vh;
-  /* ✅ overflow retiré — géré écran par écran */
+  overflow-y: auto !important;
 }
 
-/* ---------- ECRANS ---------- */
+/* ---------- ÉCRANS ---------- */
 
 .screen {
   width: 100%;
   min-height: 100vh;
+  height: auto !important;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: all 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 
-.hidden {
-  display: none !important;
-}
-
-.screen.active {
-  display: flex;
-}
+.hidden  { display: none !important; }
+.screen.active { display: flex; }
 
 /* ---------- SPLASH ---------- */
 
 #splash-screen {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(61,107,79,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 85%, rgba(196,112,74,0.12) 0%, transparent 50%),
+    linear-gradient(160deg, #F6EAD7 0%, #EFE4CE 60%, #E7DDCF 100%);
   overflow: hidden;
+  position: relative;
+}
+
+#splash-screen::before {
+  content: "🌿";
+  position: absolute;
+  top: -10px; left: -15px;
+  font-size: 130px;
+  opacity: 0.12;
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+
+#splash-screen::after {
+  content: "🌺";
+  position: absolute;
+  bottom: 10px; right: -10px;
+  font-size: 110px;
+  opacity: 0.12;
+  transform: rotate(15deg);
+  pointer-events: none;
 }
 
 .logo-container {
   text-align: center;
+  animation: slideUp 0.8s ease both;
 }
 
 .plane {
-  font-size: 70px;
+  font-size: 60px;
   color: var(--gold);
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  display: block;
   animation: planeFloat 3s ease infinite;
 }
 
 .logo-container h1 {
   font-family: var(--title-font);
-  font-size: 48px;
+  font-size: 44px;
   font-weight: 700;
-  color: var(--gold);
-  letter-spacing: 2px;
+  color: var(--forest);
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 .logo-container p {
-  margin-top: 20px;
-  font-size: 18px;
-  color: var(--ivory);
-  opacity: 0.9;
+  margin-top: 16px;
+  font-size: 16px;
+  color: var(--text-mid);
+  font-style: italic;
+  opacity: 0.85;
 }
 
 /* ---------- ÉCRANS SCROLLABLES ---------- */
@@ -85,6 +108,10 @@ body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 40px;
+  background:
+    radial-gradient(ellipse at 90% 5%,  rgba(61,107,79,0.1)  0%, transparent 40%),
+    radial-gradient(ellipse at 5%  95%, rgba(196,112,74,0.08) 0%, transparent 40%),
+    linear-gradient(160deg, #F6EAD7 0%, #EFE4CE 60%, #E7DDCF 100%);
 }
 
 #boarding-screen {
@@ -103,6 +130,5 @@ button {
   transition: 0.3s;
 }
 
-button:hover {
-  transform: translateY(-3px);
-}
+button:hover { transform: translateY(-2px); }
+button:active { transform: translateY(0); }

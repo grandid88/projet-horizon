@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>QR Code Mission Paradis</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  @page { size: 80mm 45mm; margin: 0; }
+  
+  body {
+    width: 80mm;
+    height: 45mm;
+    background: #F7F3EB;
+    font-family: 'Georgia', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card {
+    width: 76mm;
+    height: 41mm;
+    background: #F7F3EB;
+    border: 0.5mm solid rgba(212,175,55,0.4);
+    border-radius: 3mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5mm;
+    padding: 2mm;
+  }
+
+  .top-text {
+    font-size: 7.5pt;
+    color: #13233F;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .qr-wrapper {
+    position: relative;
+    width: 28mm;
+    height: 28mm;
+  }
+
+  #qrcode {
+    width: 28mm !important;
+    height: 28mm !important;
+  }
+
+  #qrcode img, #qrcode canvas {
+    width: 28mm !important;
+    height: 28mm !important;
+  }
+
+  .plane-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 7mm;
+    height: 7mm;
+    background: #F7F3EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12pt;
+    z-index: 10;
+  }
+
+  .bottom-text {
+    font-size: 7pt;
+    color: #13233F;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 0.5px;
+  }
+
+  .gold-line {
+    width: 20mm;
+    height: 0.3mm;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="top-text">Isabelle &amp; Didier ✈ AIRLINES</div>
+  <div class="gold-line"></div>
+  <div class="qr-wrapper">
+    <div id="qrcode"></div>
+    <div class="plane-center">✈</div>
+  </div>
+  <div class="gold-line"></div>
+  <div class="bottom-text">Mission Maurice : scannez-moi !...</div>
+</div>
+
+<script>
+new QRCode(document.getElementById("qrcode"), {
+  text: "https://grandid88.github.io/projet-horizon/",
+  width: 106,
+  height: 106,
+  colorDark: "#13233F",
+  colorLight: "#F7F3EB",
+  correctLevel: QRCode.CorrectLevel.M
+});
+</script>
+
+</body>
+</html>

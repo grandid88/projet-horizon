@@ -1,107 +1,101 @@
 /* ==========================================================
-   PROJET HORIZON
-   VARIABLES GLOBALES
-   Version 0.1
+   PROJET HORIZON — variables.css
+   Charte graphique Mariage Isabelle & Didier
+   Thème : Tropical Vintage Ivoire
+   Version 2.0
 ========================================================== */
 
 :root {
 
-    /*======================================================
-      COULEURS
-    ======================================================*/
+  /*======================================================
+    COULEURS PRINCIPALES
+  ======================================================*/
 
-    --navy: #13233F;
-    --navy-light: #1E355D;
+  /* Fonds ivoire/beige — extraits des visuels du mariage */
+  --ivory-main:   #F6EAD7;   /* fond principal — menu */
+  --ivory-card:   #EFE4CE;   /* fond cartes */
+  --ivory-deep:   #E7DDCF;   /* fond secondaire */
+  --sand:         #D7CDB8;   /* sable — affichette table */
 
-    --gold: #D4AF37;
-    --gold-light: #F0D87A;
+  /* Verts tropicaux */
+  --forest:       #3D6B4F;   /* vert forêt — titres principaux */
+  --forest-light: #5A8C6A;   /* vert sauge clair */
+  --sage:         #8FAF9A;   /* vert sauge doux */
 
-    --ivory: #F7F3EB;
+  /* Ors */
+  --gold:         #C9A84C;   /* or chaud principal */
+  --gold-dark:    #A8863A;   /* or foncé */
+  --gold-light:   #E8C97A;   /* or clair */
 
-    --sage: #8FAF9A;
+  /* Terracotta/Corail — fleurs hibiscus */
+  --terracotta:   #C4704A;   /* terracotta chaud */
+  --coral:        #D4845A;   /* corail doux */
 
-    --terracotta: #C7745A;
+  /* Textes */
+  --text-dark:    #2C3E25;   /* texte principal foncé */
+  --text-mid:     #5C4A2A;   /* texte secondaire brun */
+  --text-light:   #8B7355;   /* texte discret sable */
 
-    --fuchsia: #D84E8F;
+  /* Blanc & Noir */
+  --white:        #FFFFFF;
+  --black:        #1A1A1A;
 
-    --white: #FFFFFF;
+  /* Compatibilité avec l'ancien code */
+  --navy:         #3D6B4F;
+  --navy-light:   #5A8C6A;
+  --ivory:        #F6EAD7;
+  --fuchsia:      #C4704A;
 
-    --black: #111111;
+  /*======================================================
+    TYPOGRAPHIES
+  ======================================================*/
 
+  --title-font:   "Cormorant Garamond", serif;
+  --script-font:  "Great Vibes", cursive;
+  --text-font:    "Poppins", sans-serif;
 
-    /*======================================================
-      TYPOGRAPHIES
-    ======================================================*/
+  /*======================================================
+    TAILLES
+  ======================================================*/
 
-    --title-font: "Cormorant Garamond", serif;
+  --title-xl:  42px;
+  --title-lg:  32px;
+  --title-md:  24px;
+  --text-lg:   18px;
+  --text-md:   16px;
+  --text-sm:   14px;
 
-    --text-font: "Poppins", sans-serif;
+  /*======================================================
+    ESPACEMENTS
+  ======================================================*/
 
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  40px;
+  --space-xl:  64px;
 
-    /*======================================================
-      TAILLES
-    ======================================================*/
+  /*======================================================
+    RAYONS
+  ======================================================*/
 
-    --title-xl: 42px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
 
-    --title-lg: 32px;
+  /*======================================================
+    OMBRES
+  ======================================================*/
 
-    --title-md: 24px;
+  --shadow-soft: 0 8px 24px rgba(92, 74, 42, 0.15);
+  --shadow-card: 0 15px 40px rgba(92, 74, 42, 0.20);
 
-    --text-lg: 18px;
+  /*======================================================
+    TRANSITIONS
+  ======================================================*/
 
-    --text-md: 16px;
-
-    --text-sm: 14px;
-
-
-    /*======================================================
-      ESPACEMENTS
-    ======================================================*/
-
-    --space-xs: 8px;
-
-    --space-sm: 16px;
-
-    --space-md: 24px;
-
-    --space-lg: 40px;
-
-    --space-xl: 64px;
-
-
-    /*======================================================
-      RAYONS
-    ======================================================*/
-
-    --radius-sm: 12px;
-
-    --radius-md: 20px;
-
-    --radius-lg: 28px;
-
-
-    /*======================================================
-      OMBRES
-    ======================================================*/
-
-    --shadow-soft:
-
-        0 10px 30px rgba(0,0,0,.18);
-
-    --shadow-card:
-
-        0 15px 40px rgba(0,0,0,.25);
-
-
-    /*======================================================
-      TRANSITIONS
-    ======================================================*/
-
-    --transition-fast: .25s;
-
-    --transition-normal: .45s;
-
-    --transition-slow: .8s;
+  --transition-fast:   .25s;
+  --transition-normal: .45s;
+  --transition-slow:   .8s;
 
 }
