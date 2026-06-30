@@ -7,3 +7,8 @@ URL Admin : https://grandid88.github.io/projet-horizon/admin.html
 URL Dashboard TV : https://grandid88.github.io/projet-horizon/dashboard.html
 
 PDF codes DJ : à imprimer et remettre au DJ
+
+
+Firebase Console  : console.firebase.google.com
+Compte Google     : (ton adresse Gmail) didier.huet33@gmail.com
+Projet            : projet-horizon
