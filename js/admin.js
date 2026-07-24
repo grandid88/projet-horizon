@@ -256,7 +256,5 @@ function listenFlashStatus() {
 ========================================================== */
 
 // Appel direct — modules ES toujours différés, DOM déjà prêt
-(function() {
-  console.log("⚙️ Admin HORIZON v1.0");
-  initPin();
-});
+console.log("⚙️ Admin HORIZON v1.0");
+initPin();
