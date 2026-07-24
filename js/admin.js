@@ -255,7 +255,8 @@ function listenFlashStatus() {
    DÉMARRAGE
 ========================================================== */
 
-window.addEventListener("load", function() {
+// Appel direct — modules ES toujours différés, DOM déjà prêt
+(function() {
   console.log("⚙️ Admin HORIZON v1.0");
   initPin();
 });
