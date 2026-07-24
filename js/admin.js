@@ -1,32 +1,18 @@
 /* ==========================================================
-   PROJET HORIZON — admin.js
+   PROJET HORIZON — admin.js (SDK compat — sans type=module)
    Interface organisateur
-   Version 1.0
 ========================================================== */
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, serverTimestamp }
-  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+/* Firebase est chargé via les scripts compat dans admin.html
+   db est disponible globalement via firebase.database()      */
 
-/* --- Firebase --- */
-const firebaseConfig = {
-  apiKey:            "AIzaSyCINy6uUXI-mY9d4pKB9JIDQM-J9yEBG10",
-  authDomain:        "projet-horizon-8746b.firebaseapp.com",
-  databaseURL:       "https://projet-horizon-8746b-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId:         "projet-horizon-8746b",
-  storageBucket:     "projet-horizon-8746b.firebasestorage.app",
-  messagingSenderId: "864203948873",
-  appId:             "1:864203948873:web:1fb41194ab8eff11239098"
-};
-
-const firebaseApp = initializeApp(firebaseConfig);
-const db          = getDatabase(firebaseApp);
+var db = firebase.database();
 
 /* ==========================================================
    PIN
 ========================================================== */
 
-const PIN_SECRET = "2627"; /* ← Code PIN : année du mariage ! */
+const PIN_SECRET = "2627";
 var   pinValue   = "";
 
 function initPin() {
@@ -92,7 +78,7 @@ async function initAdmin() {
 var missionsData = [];
 
 async function loadMissions() {
-  var res = await fetch("data/missions.json");
+  var res  = await fetch("data/missions.json");
   var data = await res.json();
   missionsData = data.missions;
   renderMissionsList();
@@ -158,10 +144,7 @@ function initFlashForm() {
     var km    = parseInt(document.getElementById("flash-km").value) || 150;
     var duree = parseInt(document.getElementById("flash-duree").value) || 5;
 
-    if (!titre) {
-      alert("Saisissez un titre pour la mission flash !");
-      return;
-    }
+    if (!titre) { alert("Saisissez un titre pour la mission flash !"); return; }
 
     flashCounter++;
     var mission = {
@@ -174,13 +157,12 @@ function initFlashForm() {
       startedAt:   Date.now()
     };
 
-    await set(ref(db, "flash_mission"), mission);
-
+    await db.ref("flash_mission").set(mission);
     showFlashStatus("⚡ Mission Flash active — " + duree + " min · +" + km + " km", "active");
   });
 
   document.getElementById("btn-close-flash").addEventListener("click", async function() {
-    await set(ref(db, "flash_mission"), null);
+    await db.ref("flash_mission").set(null);
     showFlashStatus("✅ Mission Flash clôturée", "closed");
     setTimeout(function() {
       var s = document.getElementById("flash-status");
@@ -192,8 +174,8 @@ function initFlashForm() {
 
 function showFlashStatus(msg, type) {
   var s = document.getElementById("flash-status");
-  s.textContent  = msg;
-  s.className    = "flash-status " + type;
+  s.textContent   = msg;
+  s.className     = "flash-status " + type;
   s.style.display = "block";
 }
 
@@ -202,7 +184,7 @@ function showFlashStatus(msg, type) {
 ========================================================== */
 
 function listenRanking() {
-  onValue(ref(db, "passagers"), function(snapshot) {
+  db.ref("passagers").on("value", function(snapshot) {
     var data = snapshot.val();
     if (!data) {
       document.getElementById("admin-ranking").innerHTML =
@@ -211,11 +193,9 @@ function listenRanking() {
       updateStats([], 0, 0);
       return;
     }
-
     var passengers = Object.values(data).sort(function(a, b) { return b.km - a.km; });
     var totalKm    = passengers.reduce(function(acc, p) { return acc + (p.km||0); }, 0);
     var totalMiss  = passengers.reduce(function(acc, p) { return acc + (p.missions||0); }, 0);
-
     updateStats(passengers, totalKm, totalMiss);
     renderAdminRanking(passengers);
   });
@@ -243,7 +223,7 @@ function renderAdminRanking(passengers) {
 }
 
 function listenFlashStatus() {
-  onValue(ref(db, "flash_mission"), function(snapshot) {
+  db.ref("flash_mission").on("value", function(snapshot) {
     var flash = snapshot.val();
     if (flash && flash.active) {
       showFlashStatus("⚡ Mission Flash active : " + flash.titre, "active");
@@ -252,9 +232,7 @@ function listenFlashStatus() {
 }
 
 /* ==========================================================
-   DÉMARRAGE
+   DÉMARRAGE — appel direct, DOM garanti prêt (script defer)
 ========================================================== */
-
-// Appel direct — modules ES toujours différés, DOM déjà prêt
 console.log("⚙️ Admin HORIZON v1.0");
 initPin();
